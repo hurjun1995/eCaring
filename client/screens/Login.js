@@ -1,23 +1,29 @@
 import React from 'react'; 
 import { View, Text, StyleSheet, TextInput, TouchableOpacity, ScrollView} from 'react-native'; 
 
+
 export const Login = () => {
-    const [value, onChangeText] = React.useState('Email'); 
+    const [email, setEmail] = React.useState('Email'); 
+    const [password, setPassword] = React.useState('Password')
 
     return(
         <View style = {styles.container}>
             <View> 
                 </View>
                 <TextInput 
-                    placeholder = "E-mail"
-                    style = {styles.input} 
-                    placeholderTextColor="#ABABAB"
+                    style={styles.input}
+                    placeholder='E-mail'
+                    placeholderTextColor="#ababab"
+                    onChangeText={(text) => setEmail(text)}
+                    value={email}
                 />
                 
                 <TextInput 
-                    style = {styles.input} 
-                    onChangeText = {text => onChangeText(text)}
-                    value = {value}
+                    style={styles.input}
+                    placeholder='E-mail'
+                    placeholderTextColor="#ababab"
+                    onChangeText={(text) => setPassword(text)}
+                    value={password}
                 />
 
                 <TouchableOpacity style = {styles.button}>
@@ -59,9 +65,7 @@ const styles = StyleSheet.create({
         left: 26,
         margin: 13,
         borderWidth: 1,
-        shadowOffset:{width:0, height: 10,},
-        shadowColor: 'black', 
-        shadowOpacity: .5,
+        borderColor: 'black'
     },  
 
     shadow:{
