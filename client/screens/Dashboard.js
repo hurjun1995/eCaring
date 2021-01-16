@@ -10,7 +10,7 @@ export const Dashboard = ({navigation}) => {
             <Avatar rounded source={require("../assets/nurse2.png")} size={65} avatarStyle={{borderWidth: 3, borderColor: '#C7D6FF'}}/>
             <Text style={styles.profileText}>You will be assisting Jane today</Text>
             <View style={styles.buttonContainer}>
-                <Icon reverse color="#83E1FF" size={18} name="group-add"/>
+                <Icon reverse color="#83E1FF" size={18} name="group-add" onPress={() => navigation.navigate('FriendCode')}/>
                 <View style={{marginLeft: -7, marginRight:-7}}>
                     <Icon reverse color="#83E1FF" size={18} name="leaderboard"/>
                 </View>

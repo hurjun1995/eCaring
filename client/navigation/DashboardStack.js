@@ -2,6 +2,7 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { Dashboard } from "../screens/Dashboard";
 import { LogForm } from "../screens/LogForm";
+import { FriendCode } from "../screens/FriendCode";
 
 const Stack = createStackNavigator();
 
@@ -25,6 +26,15 @@ const DashboardStack = () => {
                   },
                   headerLeft: null
               }}/>
+            <Stack.Screen name="FriendCode" component={FriendCode}
+                          options={{
+                              title: null,
+                              headerStyle: {
+                                  backgroundColor: '#fff',
+                                  height: 0
+                              },
+                              headerLeft: null
+                          }}/>
         </Stack.Navigator>
     );
 };
