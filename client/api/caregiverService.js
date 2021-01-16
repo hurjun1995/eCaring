@@ -5,6 +5,7 @@ class CaregiverService {
   /**
    * Try create a Caregiver with current user's UID in DB.
    * On success, construct and return Caregiver object.
+   * All parameters are required.
    * @param {string} firstName 
    * @param {string} lastName 
    * @param {string} workPlace 
@@ -27,6 +28,7 @@ class CaregiverService {
   /**
    * Try update Caregiver's fields to given values in DB.
    * On success, also update given Caregiver object.
+   * TODO: fix optional parameter
    * @param {Caregiver} caregiver 
    * @param {string} firstName 
    * @param {string} lastName 
