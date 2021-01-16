@@ -57,13 +57,36 @@ export const Dashboard = ({navigation}) => {
         }
     ];
 
+    const mentalHealth = (num) => {
+        let hearts = [];
+        for(let i=0; i<num; i++){
+            hearts.push(
+                <Icon name="favorite" color="#FF7676"/>
+            )
+        }
+        let message = [];
+        if(num === 1) message.push(<Text style={styles.healthText}>Jane is feeling sad.</Text>);
+        else if(num === 2) message.push(<Text style={styles.healthText}>Jane is feeling okay.</Text>);
+        else if(num === 3) message.push(<Text style={styles.healthText}>Jane is feeling good.</Text>);
+        else if(num === 4) message.push(<Text style={styles.healthText}>Jane is feeling great!</Text>);
+        else message.push(<Text style={styles.healthText}>Jane is feeling amazing!</Text>);
+        return(
+            <View style={{position: "absolute", top:30, left:21}}>
+                {message}
+                <View style={styles.hearts}>
+                    {hearts}
+                </View>
+            </View>
+        );
+    };
+
     const dayRow = data ? (data.map( log => (
             <View style={styles.dayRow} key={log.id}>
                 <View style={styles.date}>
                     <Text style={styles.dayNum}>{log.dayNum}</Text>
                     <Text style={styles.dayStr}>{log.dayStr}</Text>
                 </View>
-                <Text style={styles.healthText}>Jane is feeling great!</Text>
+                {mentalHealth(log.mentalHealth)}
                 <TouchableOpacity style={{position:"absolute", right:18, top:40}}>
                     <Icon name="navigate-next"/>
                 </TouchableOpacity>
@@ -218,5 +241,11 @@ const styles = StyleSheet.create({
     healthText: {
         fontWeight: "400",
         fontSize:12,
+        paddingBottom: 4
+    },
+    hearts: {
+        flex: 1,
+        flexDirection: 'row',
+        flexWrap: 'wrap'
     }
 });
