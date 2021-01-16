@@ -1,0 +1,9 @@
+{
+  "UID": "string (Document name)",
+  "first_name": "string",
+  "last_name": "string",
+  "care_giver_UID": "string",
+  "guardians": [
+    "string: UID of guardians"
+  ]
+}
