@@ -4,6 +4,8 @@ const ERROR_AUTH_EMAIL_ALREADY_IN_USE = 'auth/email-already-in-use'
 const ERROR_AUTH_INVALID_EMAIL = 'auth/invalid-email'
 const ERROR_AUTH_OPERATION_NOT_ALLOWED = 'auth/operation-not-allowed'
 const ERROR_AUTH_WEAK_PASSWORD = 'auth/weak-password'
+const ERROR_AUTH_USER_NOT_FOUND = 'auth/user-not-found'
+const ERROR_AUTH_WRONG_PASSWORD = 'auth/wrong-password'
 
 class AuthService {
   /**
@@ -15,16 +17,17 @@ class AuthService {
    * @param email user's email
    * @param password user's password
    */
-  createUser(email, password) {
-    return firebase.auth().createUserWithEmailAndPassword(email, password)
-      .catch(error => {
-        const errorCode = error.errorCode
-        if (errorCode === ERROR_AUTH_OPERATION_NOT_ALLOWED) {
-          return 'Internal error. Please try again.'
-        } else {
-          return error.message //TODO: check the error message
-        }
-      })
+  async createUser(email, password) {
+    try {
+      return firebase.auth().createUserWithEmailAndPassword(email, password)
+    } catch (error) {
+      const errorCode = error.code
+      if (errorCode === ERROR_AUTH_OPERATION_NOT_ALLOWED) {
+        throw Error('Internal error. Please try again.')
+      } else {
+        throw error //TODO: check the error message
+      }
+    }
   }
 
   /**
@@ -34,11 +37,18 @@ class AuthService {
    * @param email user's email
    * @param password user's password
    */
-  signIn(email, password) {
-    return firebase.auth().signInWithEmailAndPassword(email, password)
-      .catch(error => {
-        return error.message
-      })
+  async signIn(email, password) {
+    try {
+      return firebase.auth().signInWithEmailAndPassword(email, password)
+    } catch (error) {
+      const errorCode = error.code
+      if (errorCode === ERROR_AUTH_USER_NOT_FOUND
+        || errorCode === ERROR_AUTH_WRONG_PASSWORD) {
+        throw Error('Invalid email and/or password.')
+      } else {
+        throw error
+      }
+    }
   }
 
   signOut() {
