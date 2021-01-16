@@ -10,13 +10,19 @@ const DashboardStack = () => {
         <Stack.Navigator>
             <Stack.Screen name="Dashboard" component={Dashboard}
               options={{
+                  title: null,
+                  headerStyle: {
+                      backgroundColor: '#C7D6FF',
+                      height: 60
+                  },
+              }}/>
+            <Stack.Screen name="LogForm" component={LogForm}
+              options={{
                   title: "help me",
                   headerStyle: {
-                      backgroundColor: '#C7D6FF'
+                      backgroundColor: '#fff'
                   },
-                  headerTintColor: '#fff',
               }}/>
-            <Stack.Screen name="LogForm" component={LogForm} />
         </Stack.Navigator>
     );
 };
