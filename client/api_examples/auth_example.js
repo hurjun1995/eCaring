@@ -5,6 +5,7 @@ import React, {useState} from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
 
 import AuthService from './api/authService'
+import CaregiverService from './api/caregiverService'
 
 export default function App() {
   const [message, setMessage] = useState("placeholder")
@@ -31,12 +32,37 @@ export default function App() {
       })
   }
 
+  const createCaregiver = () => {
+    CaregiverService.create("John", "Doe", "BC Hospital", "UBC")
+      .then(caregiver => {
+        setMessage(caregiver.toString())
+      })
+      .catch(error => {
+        setMessage(error.message)
+      })
+  }
+
+  const updateCaregiver = () => {
+    CaregiverService.get()
+      .then(caregiver => {
+        return CaregiverService.update(caregiver, lastName="Hur", education="UT")
+      })
+      .then(caregiver => {
+        setMessage(caregiver.toString())
+      })
+      .catch(error => {
+        setMessage(error.message)
+      })
+  }
+
   return (
     <View style={styles.container}>
       <Text>{message}</Text>
       <StatusBar style="auto" />
       <Button title="signUp" onPress={signUp}/>
       <Button title="signIn" onPress={signIn}/>
+      <Button title="create caregiver" onPress={createCaregiver}/>
+      <Button title="update caregiver" onPress={updateCaregiver}/>
     </View>
   );
 }
