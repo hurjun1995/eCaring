@@ -1,14 +1,27 @@
 import React from 'react'; 
 import { View, Text, StyleSheet, TextInput, TouchableOpacity, ScrollView, Image} from 'react-native'; 
-
+// import AuthService from './api/authService'
 
 export const Login = ({navigation}) => {
     const [email, setEmail] = React.useState(''); 
     const [password, setPassword] = React.useState('');
 
+    // const authService = new AuthService()
+
     const pressHandler = () => {
         navigation.navigate('Select')
     }
+
+    // const signIn = () => {
+    //     authService.signIn(email, password)
+    //       .then(userCredential => {
+    //         console.log('peepeepoo')
+    //         setMessage(userCredential.user.email)
+    //       })
+    //       .catch(error => {
+    //         setMessage(error.message)
+    //       })
+    //   }
 
     return(
         <View style = {styles.container}>
@@ -30,7 +43,10 @@ export const Login = ({navigation}) => {
                     color = '#ABABAB'
             />
 
-            <TouchableOpacity style = {styles.button}>
+            <TouchableOpacity 
+                style = {styles.button}
+                //onPress={signIn}
+                >
                 <View style = {styles.buttonContainer}>
                     <Text style = {styles.buttonText}>Log In</Text>
                 </View>
@@ -83,13 +99,13 @@ const styles = StyleSheet.create({
 
     footer:{
         position: 'absolute',
-        top: 600,
+        top: 650,
         fontSize: 12,
         left: 142,
 
     },
     signUpText:{
-        top: 500,
+        top: 550,
         fontSize: 17,
         color: '#83E1FF',
         textDecorationLine: 'underline',

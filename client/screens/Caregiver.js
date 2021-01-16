@@ -1,5 +1,6 @@
 import React from 'react'; 
 import { View, Text, StyleSheet, TouchableOpacity, TouchableHighlight, TextInput, Image} from 'react-native'; 
+import { Icon } from 'react-native-elements'
 
 
 export const Caregiver = ({navigation}) => {
@@ -9,92 +10,100 @@ export const Caregiver = ({navigation}) => {
     const [password, setPassword] = React.useState('');
     const [placeOfWork, setPlaceOfWork] = React.useState('');
     const [education, setEducation] = React.useState('');
+    const backButton = () => { navigation.pop()};
 
     return(
-        <View style = {styles.container}>
-            <Text style = {styles.title}>Caregiver Profile </Text>
-            <Text style = {styles.subTitle}>AVATAR</Text>
-
-            <View style={styles.avatarContainer}>
-                <TouchableHighlight>
-                    <Image style={styles.avatar} source={require('../assets/nurse_1.png')}/>
-                </TouchableHighlight>
-
-                <TouchableHighlight>
-                    <Image style={styles.avatar} source={require('../assets/nurse_1.png')}/>
-                </TouchableHighlight>
-
-                <TouchableHighlight>
-                    <Image style={styles.avatar} source={require('../assets/nurse_1.png')}/>
-                </TouchableHighlight>
-
-                <TouchableHighlight>
-                    <Image style={styles.avatar} source={require('../assets/nurse_1.png')}/>
-                </TouchableHighlight>
-            </View>
-            <Text style = {styles.subTitle}>INFORMATION</Text>
-            <TextInput 
-                    style={styles.input}
-                    placeholder='First Name'
-                    placeholderTextColor="#ababab"
-                    onChangeText={(text) => setFirstName(text)}
-                    value={firstName}
-                    color = '#ABABAB'
-            />
-            <TextInput 
-                    style={styles.input}
-                    placeholder='Last Name'
-                    placeholderTextColor="#ababab"
-                    onChangeText={(text) => setLastName(text)}
-                    value={lastName}
-                    color = '#ABABAB'
-            />
-            <TextInput 
-                    style={styles.input}
-                    placeholder='E-mail'
-                    placeholderTextColor="#ababab"
-                    onChangeText={(text) => setEmail(text)}
-                    value={email}
-                    color = '#ABABAB'
-            />
-            <TextInput 
-                    style={styles.input}
-                    placeholder='Password'
-                    placeholderTextColor="#ababab"
-                    onChangeText={(text) => setPassword(text)}
-                    value={password}
-                    color = '#ABABAB'
-            />
-            <TextInput 
-                    style={styles.input}
-                    placeholder='Confirm Password'
-                    placeholderTextColor="#ababab"
-                    onChangeText={(text) => setPassword(text)}
-                    value={password}
-                    color = '#ABABAB'
-            />
-            <Text style = {styles.subTitle}>VERIFICATION</Text>
-            <TextInput 
-                    style={styles.input}
-                    placeholder='Place of Work'
-                    placeholderTextColor="#ababab"
-                    onChangeText={(text) => setEducation(text)}
-                    value={placeOfWork}
-                    color = '#ABABAB'
-            />
-            <TextInput 
-                    style={styles.input}
-                    placeholder='Education'
-                    placeholderTextColor="#ababab"
-                    onChangeText={(text) => setPassword(text)}
-                    value={education}
-                    color = '#ABABAB'
-            />
-            <TouchableOpacity style = {styles.button}>
-                <View style = {styles.buttonContainer}>
-                    <Text style = {styles.buttonText}>Log In</Text>
-                </View>
+        <View>
+            <TouchableOpacity style={styles.backButton} onPress = {backButton}>
+                <Icon name="navigate-before"/>
             </TouchableOpacity>
+
+            <View style = {styles.container}>
+                <Text style = {styles.title}>Caregiver Profile </Text>
+                    <Text style = {styles.subTitle}>AVATAR</Text>
+
+                    <View style={styles.avatarContainer}>
+                        <TouchableHighlight>
+                            <Image style={styles.avatar} source={require('../assets/nurse_1.png')}/>
+                        </TouchableHighlight>
+
+                        <TouchableHighlight>
+                            <Image style={styles.avatar} source={require('../assets/nurse_1.png')}/>
+                        </TouchableHighlight>
+
+                        <TouchableHighlight>
+                            <Image style={styles.avatar} source={require('../assets/nurse_1.png')}/>
+                        </TouchableHighlight>
+
+                        <TouchableHighlight>
+                            <Image style={styles.avatar} source={require('../assets/nurse_1.png')}/>
+                        </TouchableHighlight>
+                    </View>
+                    <Text style = {styles.subTitle}>INFORMATION</Text>
+                    <TextInput 
+                            style={styles.input}
+                            placeholder='First Name'
+                            placeholderTextColor="#ababab"
+                            onChangeText={(text) => setFirstName(text)}
+                            value={firstName}
+                            color = '#ABABAB'
+                    />
+                    <TextInput 
+                            style={styles.input}
+                            placeholder='Last Name'
+                            placeholderTextColor="#ababab"
+                            onChangeText={(text) => setLastName(text)}
+                            value={lastName}
+                            color = '#ABABAB'
+                    />
+                    <TextInput 
+                            style={styles.input}
+                            placeholder='E-mail'
+                            placeholderTextColor="#ababab"
+                            onChangeText={(text) => setEmail(text)}
+                            value={email}
+                            color = '#ABABAB'
+                    />
+                    <TextInput 
+                            style={styles.input}
+                            placeholder='Password'
+                            placeholderTextColor="#ababab"
+                            onChangeText={(text) => setPassword(text)}
+                            value={password}
+                            color = '#ABABAB'
+                    />
+                    <TextInput 
+                            style={styles.input}
+                            placeholder='Confirm Password'
+                            placeholderTextColor="#ababab"
+                            onChangeText={(text) => setPassword(text)}
+                            value={password}
+                            color = '#ABABAB'
+                    />
+                    <Text style = {styles.subTitle}>VERIFICATION</Text>
+                    <TextInput 
+                            style={styles.input}
+                            placeholder='Place of Work'
+                            placeholderTextColor="#ababab"
+                            onChangeText={(text) => setEducation(text)}
+                            value={placeOfWork}
+                            color = '#ABABAB'
+                    />
+                    <TextInput 
+                            style={styles.input}
+                            placeholder='Education'
+                            placeholderTextColor="#ababab"
+                            onChangeText={(text) => setPassword(text)}
+                            value={education}
+                            color = '#ABABAB'
+                    />
+                    <TouchableOpacity style = {styles.button}>
+                        <View style = {styles.buttonContainer}>
+                            <Text style = {styles.buttonText}>Log In</Text>
+                        </View>
+                    </TouchableOpacity>
+            </View>
+               
         </View>
     )
 }
@@ -163,5 +172,12 @@ const styles = StyleSheet.create({
         borderRadius: 19,
         left: 140,
         top: 670
+    }, 
+    backButton:{
+        top: 60, 
+        left: -170
     },
+    container:{
+        top: 50
+    }
 })

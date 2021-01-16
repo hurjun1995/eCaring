@@ -16,7 +16,7 @@ const LogStack = () => {
                     title:null,
                     headerStyle:{
                         backgroundColor: '#FBFBFB',
-                        height:60
+                        height:1
                     }
                 }}
 
@@ -26,8 +26,9 @@ const LogStack = () => {
                     title:null,
                     headerStyle:{
                         backgroundColor: '#FBFBFB',
-                        height:100
-                    }
+                        height:1
+                    },
+                    headerLeft: null
                 }}
             />
              <Stack.Screen name = "Gaurdian" component = {Gaurdian}
@@ -35,8 +36,9 @@ const LogStack = () => {
                     title:null,
                     headerStyle:{
                         backgroundColor: '#FBFBFB',
-                        height:100
-                    }
+                        height:1
+                    },
+                    headerLeft: null
                 }}
             />
              <Stack.Screen name = "Caregiver" component = {Caregiver}
@@ -44,8 +46,9 @@ const LogStack = () => {
                     title:null,
                     headerStyle:{
                         backgroundColor: '#FBFBFB',
-                        height:100
-                    }
+                        height:1
+                    },
+                    headerLeft: null
                 }}
             />
         </Stack.Navigator>
