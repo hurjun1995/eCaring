@@ -24,7 +24,8 @@ const DashboardStack = () => {
                       backgroundColor: '#fff',
                       height: 0
                   },
-                  headerLeft: null
+                  headerLeft: null,
+                  gesturesEnabled: false
               }}/>
             <Stack.Screen name="FriendCode" component={FriendCode}
                           options={{
