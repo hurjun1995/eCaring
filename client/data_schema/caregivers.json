@@ -3,5 +3,7 @@
   "first_name": "string",
   "last_name": "string",
   "work_place": "string",
-  "education": "string"
+  "education": "string",
+  "email": "string: from user",
+  "patientUID": "string: UID of patient"
 }
