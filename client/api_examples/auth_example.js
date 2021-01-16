@@ -6,12 +6,14 @@ import { StyleSheet, Text, View, Button } from 'react-native';
 
 import AuthService from './api/authService'
 import CaregiverService from './api/caregiverService'
+import PatientService from './api/patientService'
 
 export default function App() {
   const [message, setMessage] = useState("placeholder")
+  const [caregiver, setCaregiver] = useState({})
 
   const authService = new AuthService()
-  const email = "test2@example.com"
+  const email = "test8@example.com"
   const password = "testpass"
   const signUp = () => {
     authService.createUser(email, password)
@@ -35,7 +37,8 @@ export default function App() {
   const createCaregiver = () => {
     CaregiverService.create("John", "Doe", "BC Hospital", "UBC")
       .then(caregiver => {
-        setMessage(caregiver.toString())
+        setMessage(caregiver.toString() + caregiver.email)
+        setCaregiver(caregiver)
       })
       .catch(error => {
         setMessage(error.message)
@@ -45,10 +48,41 @@ export default function App() {
   const updateCaregiver = () => {
     CaregiverService.get()
       .then(caregiver => {
-        return CaregiverService.update(caregiver, lastName="Hur", education="UT")
+        return CaregiverService.update(caregiver, "last", "first", "netapp", "UT")
       })
       .then(caregiver => {
-        setMessage(caregiver.toString())
+        setMessage(caregiver.toString() + caregiver.email)
+        setCaregiver(caregiver)
+      })
+      .catch(error => {
+        setMessage(error.message)
+      })
+  }
+
+  const getCaregiver = async () => {
+    try {
+      const caregiver = await CaregiverService.get()
+      setMessage(caregiver.toString() + caregiver.email)
+      setCaregiver(caregiver)
+    } catch(error) {
+      setMessage(error.message)
+    }
+  }
+
+  const createPatient = () => {
+    PatientService.createAndRegister(caregiver, "Alice", "Lee")
+      .then(patient => {
+        setMessage(patient.toString())
+      })
+      .catch(error => {
+        setMessage(error.message)
+      })
+  }
+
+  const getPatient = () => {
+    PatientService.get(caregiver)
+      .then(patient => {
+        setMessage(patient.toString())
       })
       .catch(error => {
         setMessage(error.message)
@@ -63,6 +97,9 @@ export default function App() {
       <Button title="signIn" onPress={signIn}/>
       <Button title="create caregiver" onPress={createCaregiver}/>
       <Button title="update caregiver" onPress={updateCaregiver}/>
+      <Button title="get caregiver" onPress={getCaregiver}/>
+      <Button title="create patient" onPress={createPatient}/>
+      <Button title="get patient" onPress={getPatient}/>
     </View>
   );
 }
