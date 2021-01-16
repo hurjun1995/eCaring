@@ -1,6 +1,4 @@
 # dependencies
-node_modules
-
 .DS_Store
 
 npm-debug.log*
@@ -9,4 +7,16 @@ yarn-error.log*
 
 .vscode
 .idea
+
+node_modules
+.env
 .expo
+.expo/*
+npm-debug.*
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+*.orig.*
+web-build/
