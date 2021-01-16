@@ -120,7 +120,7 @@ export const Dashboard = ({navigation}) => {
                 <Icon name="add" color="#fff"/>
             </TouchableOpacity>
             <SafeAreaView style={styles.container}>
-                <ScrollView style={{position:"absolute", top:380, width:375, height: 600}} showsVerticalScrollIndicator={false}>
+                <ScrollView style={{position:"absolute", top:440, width:375, height: 600}} showsVerticalScrollIndicator={false}>
                     <View style={{flexDirection: 'row', alignItems: 'center', marginBottom:10}}>
                         <Text style={{width: 63, textAlign: 'center', color:'#7B7D7D', fontWeight:"600", fontSize:10}}>JANUARY</Text>
                         <View style={{flex: 1, height: 0.5, backgroundColor: '#C4C4C4'}} />
@@ -143,13 +143,13 @@ const styles = StyleSheet.create({
     },
     logo: {
         position: "absolute",
-        top: 0
+        top: 60
     },
     patientImg: {
         position: "absolute",
         width: 295,
         height: 295,
-        top: 30,
+        top: 90,
         right: -155,
     },
     profile: {
@@ -165,7 +165,7 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.25,
         position: "absolute",
         left: 30,
-        top: 55,
+        top: 115,
         alignItems: "center",
         paddingTop: 29,
         paddingLeft: 0,
@@ -191,7 +191,7 @@ const styles = StyleSheet.create({
     textBox: {
         position: "absolute",
         left: 30,
-        top: 315
+        top: 375
 
     },
     addLogButton: {
@@ -202,7 +202,7 @@ const styles = StyleSheet.create({
         justifyContent:"center",
         right:52,
         position:"absolute",
-        top:325
+        top:385
     },
     dayRow: {
         overflow: "visible",

@@ -14,7 +14,7 @@ const DashboardStack = () => {
                   title: null,
                   headerStyle: {
                       backgroundColor: '#C7D6FF',
-                      height: 60
+                      height: 0
                   },
               }}/>
             <Stack.Screen name="LogForm" component={LogForm}
@@ -22,7 +22,7 @@ const DashboardStack = () => {
                   title: null,
                   headerStyle: {
                       backgroundColor: '#fff',
-                      height: 60
+                      height: 0
                   },
                   headerLeft: null
               }}/>
