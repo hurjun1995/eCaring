@@ -1,9 +1,12 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Button } from 'react-native';
 
-export const LogForm = () => {
+export const LogForm = ({navigation}) => {
     return (
       <View>
+        <Button title="back" onPress={() => {
+            navigation.pop();
+        }}/>
         <Text>
             Log Form
         </Text>

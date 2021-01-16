@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, TouchableOpacity, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, Image, TouchableOpacity, ScrollView, SafeAreaView } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Logo } from '../components/Logo';
 import { Avatar, Icon } from "react-native-elements";
@@ -19,15 +19,57 @@ export const Dashboard = ({navigation}) => {
         </View>
     );
 
-    const dayRow = () => {
-        return (
-            <View style={styles.dayRow}>
-                <Text>14</Text>
-                <Text>THU</Text>
-                <Text>Jane is feeling great!</Text>
+    const data = [
+        {
+            mentalHealth: 3,
+            month: "january",
+            dayNum: "15",
+            dayStr: "FRI",
+            id:1
+        },
+        {
+            mentalHealth: 4,
+            month: "january",
+            dayNum: "14",
+            dayStr: "THU",
+            id:2
+        },
+        {
+            mentalHealth: 5,
+            month: "january",
+            dayNum: "13",
+            dayStr: "WED",
+            id:3
+        },
+        {
+            mentalHealth: 1,
+            month: "january",
+            dayNum: "12",
+            dayStr: "TUE",
+            id:4
+        },
+        {
+            mentalHealth: 5,
+            month: "january",
+            dayNum: "11",
+            dayStr: "MON",
+            id:5
+        }
+    ];
+
+    const dayRow = data ? (data.map( log => (
+            <View style={styles.dayRow} key={log.id}>
+                <View style={styles.date}>
+                    <Text style={styles.dayNum}>{log.dayNum}</Text>
+                    <Text style={styles.dayStr}>{log.dayStr}</Text>
+                </View>
+                <Text style={styles.healthText}>Jane is feeling great!</Text>
+                <TouchableOpacity style={{position:"absolute", right:18, top:40}}>
+                    <Icon name="navigate-next"/>
+                </TouchableOpacity>
             </View>
-        );
-    };
+        ))
+    ) : (<View/>);
 
     return (
         <View style={styles.container}>
@@ -54,13 +96,16 @@ export const Dashboard = ({navigation}) => {
             <TouchableOpacity style={styles.addLogButton} onPress={() => navigation.navigate('LogForm')}>
                 <Icon name="add" color="#fff"/>
             </TouchableOpacity>
-            <ScrollView style={{position:"absolute", top:380, width:375, height: 600}}>
-                <View style={{flexDirection: 'row', alignItems: 'center', marginBottom:10}}>
-                    <Text style={{width: 63, textAlign: 'center', color:'#7B7D7D', fontWeight:"600", fontSize:10}}>JANUARY</Text>
-                    <View style={{flex: 1, height: 0.5, backgroundColor: '#C4C4C4'}} />
-                </View>
-                {dayRow()}
-            </ScrollView>
+            <SafeAreaView style={styles.container}>
+                <ScrollView style={{position:"absolute", top:380, width:375, height: 600}} showsVerticalScrollIndicator={false}>
+                    <View style={{flexDirection: 'row', alignItems: 'center', marginBottom:10}}>
+                        <Text style={{width: 63, textAlign: 'center', color:'#7B7D7D', fontWeight:"600", fontSize:10}}>JANUARY</Text>
+                        <View style={{flex: 1, height: 0.5, backgroundColor: '#C4C4C4'}} />
+                    </View>
+                    {dayRow}
+                    <View style={{height: 154}}/>
+                </ScrollView>
+            </SafeAreaView>
         </View>
     );
 };
@@ -137,6 +182,7 @@ const styles = StyleSheet.create({
         top:325
     },
     dayRow: {
+        overflow: "visible",
         width:360,
         height:101,
         borderBottomRightRadius:25,
@@ -152,6 +198,25 @@ const styles = StyleSheet.create({
         backgroundColor: '#FBFBFB',
         alignSelf: "center",
         borderLeftColor: '#C9F2FF',
-        borderLeftWidth: 88
+        borderLeftWidth: 88,
+        marginBottom: 10,
+    },
+    date: {
+        paddingTop: 20,
+        position: "absolute",
+        left: -60,
+        alignItems: "center"
+    },
+    dayNum: {
+        fontWeight: "600",
+        fontSize: 30,
+    },
+    dayStr: {
+        fontWeight: "600",
+        fontSize:15
+    },
+    healthText: {
+        fontWeight: "400",
+        fontSize:12,
     }
 });
