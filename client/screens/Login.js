@@ -1,98 +1,99 @@
 import React from 'react'; 
-import { View, Text, StyleSheet, TextInput, TouchableOpacity, ScrollView} from 'react-native'; 
+import { View, Text, StyleSheet, TextInput, TouchableOpacity, ScrollView, Image} from 'react-native'; 
 
 
-export const Login = () => {
-    const [email, setEmail] = React.useState('Email'); 
-    const [password, setPassword] = React.useState('Password')
+export const Login = ({navigation}) => {
+    const [email, setEmail] = React.useState(''); 
+    const [password, setPassword] = React.useState('');
+
+    const pressHandler = () => {
+        navigation.navigate('Select')
+    }
 
     return(
         <View style = {styles.container}>
-            <View> 
-                </View>
-                <TextInput 
+            <TextInput 
+                style={styles.input}
+                placeholder='E-mail'
+                placeholderTextColor="#ababab"
+                onChangeText={(text) => setEmail(text)}
+                value={email}
+                color = '#ABABAB'
+            />
+
+            <TextInput 
                     style={styles.input}
-                    placeholder='E-mail'
-                    placeholderTextColor="#ababab"
-                    onChangeText={(text) => setEmail(text)}
-                    value={email}
-                />
-                
-                <TextInput 
-                    style={styles.input}
-                    placeholder='E-mail'
+                    placeholder='Password'
                     placeholderTextColor="#ababab"
                     onChangeText={(text) => setPassword(text)}
                     value={password}
-                />
+                    color = '#ABABAB'
+            />
 
-                <TouchableOpacity style = {styles.button}>
+            <TouchableOpacity style = {styles.button}>
+                <View style = {styles.buttonContainer}>
                     <Text style = {styles.buttonText}>Log In</Text>
-                </TouchableOpacity>
+                </View>
+            </TouchableOpacity>
+
                 
-                <Text style = {styles.footer}>Don't have an account?</Text>
-                <TouchableOpacity style = {styles.signUp}>
-                    <Text style = {styles.signUpText}>Sign Up</Text>
-                </TouchableOpacity>
+            <Text style = {styles.footer}>Don't have an account?</Text>
+            <TouchableOpacity 
+                onPress={pressHandler}>
+                <Text style = {styles.signUpText}>Sign Up</Text>
+            </TouchableOpacity>
         </View>
     )
 }; 
 
 const styles = StyleSheet.create({
-    container:{
-        flex: 1,
-        alignItems: 'center'
-    },
     buttonText:{
         color:'white',
-        fontSize: 15, 
+        fontSize: 15,
+        lineHeight: 40
     },
-    button:{
-        backgroundColor: '#83E1FF', 
-        width: 130,
-        height: 40,
-        marginRight: 30,
-        marginLeft: 30,
-        top: 400,
-        borderRadius: 20,
-        alignItems: 'center', 
-        justifyContent: 'center',
 
+    buttonContainer:{
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+
+    button:{
+        position:'absolute',
+        width: 130,
+        height: 38,
+        left: 142,
+        top: 450,
+        backgroundColor: '#83E1FF', 
+        borderRadius: 19
     },
     input:{
-        width: 329,
+        width: '85%',
+        paddingLeft: 14,
         height: 38,
         left: 26,
-        margin: 13,
-        borderWidth: 1,
-        borderColor: 'black'
+        top: 306,
+        marginRight: 60,
+        marginVertical: 13,
+        borderRadius: 9,
+        borderColor: 'grey', 
+        borderWidth: .5
     },  
 
-    shadow:{
-        shadowOffset:{width: 10, height: 10,},
-        shadowColor: 'black', 
-        shadowOpacity: .5,
-    },
-    header:{
-        width: '100%', 
-        height: 90, 
-        padding: 36, 
-        backgroundColor: 'red',
-        alignItems: 'center',
-        justifyContent: 'center'
-    },
-    headerTitle: {
-        color: 'black', 
-        fontSize: 18
-    },
+
     footer:{
-        marginTop: 500
+        position: 'absolute',
+        top: 600,
+        fontSize: 12,
+        left: 142,
+
     },
     signUpText:{
-        textDecorationLine: 'underline',
+        top: 500,
+        fontSize: 17,
         color: '#83E1FF',
-        paddingTop: 10,
-        fontSize: 17
+        textDecorationLine: 'underline',
+        left: 179,
     }
 
 }); 
