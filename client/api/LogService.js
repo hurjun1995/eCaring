@@ -26,7 +26,7 @@ export class LogService {
       throw Error("Patient does not exist.")
     }
 
-    await patientRef.set({
+    await patientRef.update({
       logs: firebase.firestore.FieldValue.arrayUnion({
         createdAt: Date.now(),
         hydration,
@@ -49,5 +49,20 @@ export class LogService {
     }
 
     return patientSnapShot.data()['logs']
+  }
+
+  static async get7Days(patient) {
+    logs = await this.get(patient)
+
+    const logs7Days = []
+    const date7DaysAgo = Date.now() - (7 * 24 * 60 * 60 * 1000)
+    logs.forEach(log => {
+      if (log.createdAt >= date7DaysAgo) {
+        logs7Days.push(log)
+      }
+    })
+    logs.sort((a, b) => a.createdAt - b.createdAt)
+    
+    return logs
   }
 }

@@ -151,6 +151,18 @@ export default function App() {
     }
   }
 
+  const get7DaysLog = async () => {
+    try {
+      const patient = await PatientService.get(caregiver.patientUID)
+      const logs = await LogService.get7Days(patient)
+      setMessage('fetched log!')
+      console.log(logs)
+    } catch (error) {
+      console.log(error)
+      setMessage(error.message)
+    }
+  }
+
   return (
     <View style={styles.container}>
       <Text>{message}</Text>
@@ -167,6 +179,7 @@ export default function App() {
       <Button title="get Guardian" onPress={getGuardian}/>
       <Button title="add Log" onPress={addLog}/>
       <Button title="get Log" onPress={getLog}/>
+      <Button title="get 7 days Log" onPress={get7DaysLog}/>
     </View>
   );
 }
