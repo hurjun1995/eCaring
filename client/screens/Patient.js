@@ -27,6 +27,7 @@ export const Patient = ({navigation}) => {
     const createPatient = () => {
         PatientService.createAndRegister(CaregiverService.get(), firstName, lastName)
           .then(patient => {
+            console.log(CaregiverService.get());
             toDash();
             
           })
