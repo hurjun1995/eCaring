@@ -1,13 +1,21 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity, ScrollView, SafeAreaView } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Avatar, Icon } from "react-native-elements";
 
+import CaregiverService from '../api/caregiverService'
+import PatientService from '../api/patientService'
+import LogService from '../api/LogService'
+
 export const Dashboard = ({navigation}) => {
+    
+    caregiver = await CaregiverService.get()
+    patient = await PatientService.get()
+
     const profile = (
         <View style={styles.profile}>
             <Avatar rounded source={require("../assets/nurse_2.png")} size={65} avatarStyle={{borderWidth: 3, borderColor: '#C7D6FF'}}/>
-            <Text style={styles.profileText}>You will be assisting Jane today</Text>
+            <Text style={styles.profileText}>You will be assisting {patient.firstName} today</Text>
             <View style={styles.buttonContainer}>
                 <Icon reverse color="#83E1FF" size={18} name="group-add" onPress={() => navigation.navigate('FriendCode')}/>
                 <View style={{marginLeft: -7, marginRight:-7}}>
@@ -18,6 +26,7 @@ export const Dashboard = ({navigation}) => {
         </View>
     );
 
+    const data = LogService.get(patient)
     const data = [
         {
             mentalHealth: 3,
@@ -64,11 +73,11 @@ export const Dashboard = ({navigation}) => {
             )
         }
         let message = [];
-        if(num === 1) message.push(<Text style={styles.healthText}>Jane is feeling sad.</Text>);
-        else if(num === 2) message.push(<Text style={styles.healthText}>Jane is feeling okay.</Text>);
-        else if(num === 3) message.push(<Text style={styles.healthText}>Jane is feeling good.</Text>);
-        else if(num === 4) message.push(<Text style={styles.healthText}>Jane is feeling great!</Text>);
-        else message.push(<Text style={styles.healthText}>Jane is feeling amazing!</Text>);
+        if(num === 1) message.push(<Text style={styles.healthText}>{patient.firstName} is feeling sad.</Text>);
+        else if(num === 2) message.push(<Text style={styles.healthText}>{patient.firstName} is feeling okay.</Text>);
+        else if(num === 3) message.push(<Text style={styles.healthText}>{patient.firstName} is feeling good.</Text>);
+        else if(num === 4) message.push(<Text style={styles.healthText}>{patient.firstName} is feeling great!</Text>);
+        else message.push(<Text style={styles.healthText}>{patient.firstName} is feeling amazing!</Text>);
         return(
             <View style={{position: "absolute", top:30, left:21}}>
                 {message}
@@ -78,21 +87,27 @@ export const Dashboard = ({navigation}) => {
             </View>
         );
     };
-
-    const dayRow = data ? (data.map( log => (
+    const days = ['SUN','MON','TUE','WED','THU','FRI','SAT'];
+    const months = ['January','February','March','April','May','June','July','August','September','October','November','December']
+    const dayRow = data ? (data.map(log => {
+        const date = new Date(log['createdAt'])
+        const dayNum = date.getDate()
+        const dayStr = days[date.getDay()]
+        (
             <View style={styles.dayRow} key={log.id}>
                 <View style={styles.date}>
-                    <Text style={styles.dayNum}>{log.dayNum}</Text>
-                    <Text style={styles.dayStr}>{log.dayStr}</Text>
+                    <Text style={styles.dayNum}>{dayNum}</Text>
+                    <Text style={styles.dayStr}>{dayStr}</Text>
                 </View>
                 {mentalHealth(log.mentalHealth)}
                 <TouchableOpacity style={{position:"absolute", right:18, top:40}}>
                     <Icon name="navigate-next"/>
                 </TouchableOpacity>
             </View>
-        ))
+        )})
     ) : (<View/>);
 
+    const month = months[new Date(data[0]['createdAt']).getMonth()]
     return (
         <View style={styles.container}>
             <LinearGradient
@@ -112,8 +127,8 @@ export const Dashboard = ({navigation}) => {
             <Image source={require("../assets/lady2.png")} style={styles.patientImg}/>
             {profile}
             <View style={styles.textBox}>
-                <Text style={{fontSize:12, fontWeight:"500", paddingBottom:3}}>Hi John, here are</Text>
-                <Text style={{fontSize:25, fontWeight:"500"}}>Jane's Days</Text>
+                <Text style={{fontSize:12, fontWeight:"500", paddingBottom:3}}>Hi {caregiver.firstName}, here are</Text>
+                <Text style={{fontSize:25, fontWeight:"500"}}>{patient.firstName}'s Days</Text>
             </View>
             <TouchableOpacity style={styles.addLogButton} onPress={() => navigation.navigate('LogForm')}>
                 <Icon name="add" color="#fff"/>
@@ -121,7 +136,7 @@ export const Dashboard = ({navigation}) => {
             <SafeAreaView style={styles.container}>
                 <ScrollView style={{position:"absolute", top:440, width:375, height: 600}} showsVerticalScrollIndicator={false}>
                     <View style={{flexDirection: 'row', alignItems: 'center', marginBottom:10}}>
-                        <Text style={{width: 63, textAlign: 'center', color:'#7B7D7D', fontWeight:"600", fontSize:10}}>JANUARY</Text>
+                        <Text style={{width: 63, textAlign: 'center', color:'#7B7D7D', fontWeight:"600", fontSize:10}}>{month}</Text>
                         <View style={{flex: 1, height: 0.5, backgroundColor: '#C4C4C4'}} />
                     </View>
                     {dayRow}
