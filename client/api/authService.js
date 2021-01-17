@@ -1,5 +1,6 @@
 import firebase from './firebase'
-import caregiverService from './caregiverService'
+import CaregiverService from './caregiverService'
+import GuardianService from './guardianService'
 
 const ERROR_AUTH_EMAIL_ALREADY_IN_USE = 'auth/email-already-in-use'
 const ERROR_AUTH_INVALID_EMAIL = 'auth/invalid-email'
@@ -43,12 +44,11 @@ class AuthService {
     try {
       await firebase.auth().signInWithEmailAndPassword(email, password)
 
-      const caregiver = await caregiverService.get()
+      const caregiver = await CaregiverService.get()
       if (caregiver) return caregiver
 
-      // TODO: still implementing
-      // const guardian = await guardianService.get()
-      // if (guardian) return guardian
+      const guardian = await GuardianService.get()
+      if (guardian) return guardian
     } catch (error) {
       const errorCode = error.code
       if (errorCode === ERROR_AUTH_USER_NOT_FOUND
