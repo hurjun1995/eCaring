@@ -73,7 +73,7 @@ export const Caregiver = ({navigation}) => {
                                 style={styles.avatar} style = {
                                     {borderWidth: selAvatar1 === true ? 3 : 1,
                                     borderRadius: 100,
-                                    borderColor: '#C7D6FF',
+                                    borderColor: selAvatar1 === true ? '#83E1FF' : '#C7D6FF',
                                     width: 70,
                                     height: 70,
                                     resizeMode: 'stretch'
@@ -86,7 +86,7 @@ export const Caregiver = ({navigation}) => {
                                 style={styles.avatar} style = {
                                     {borderWidth: selAvatar2 === true ? 3 : 1,
                                     borderRadius: 100,
-                                    borderColor: '#C7D6FF',
+                                    borderColor: selAvatar2 === true ? '#83E1FF' : '#C7D6FF',
                                     width: 70,
                                     height: 70,
                                     resizeMode: 'stretch'
@@ -99,7 +99,7 @@ export const Caregiver = ({navigation}) => {
                                 style={styles.avatar} style = {
                                     {borderWidth: selAvatar3 === true ? 3 : 1,
                                     borderRadius: 100,
-                                    borderColor: '#C7D6FF',
+                                    borderColor: selAvatar3 === true ? '#83E1FF' : '#C7D6FF',
                                     width: 70,
                                     height: 70,
                                     resizeMode: 'stretch'
@@ -112,7 +112,7 @@ export const Caregiver = ({navigation}) => {
                                 style={styles.avatar} style = {
                                     {borderWidth: selAvatar4 === true ? 3 : 1,
                                     borderRadius: 100,
-                                    borderColor: '#C7D6FF',
+                                    borderColor: selAvatar4 === true ? '#83E1FF' : '#C7D6FF',
                                     width: 70,
                                     height: 70,
                                     resizeMode: 'stretch'
