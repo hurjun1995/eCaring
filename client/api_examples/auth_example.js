@@ -8,6 +8,7 @@ import AuthService from './api/authService'
 import CaregiverService from './api/caregiverService'
 import PatientService from './api/patientService'
 import GuardianService from './api/guardianService'
+import { LogService, FoodIntake, Vital } from './api/LogService'
 
 export default function App() {
   const [message, setMessage] = useState("placeholder")
@@ -122,6 +123,34 @@ export default function App() {
     }
   }
 
+  const addLog = async () => {
+    try {
+      const patient = await PatientService.get(caregiver)
+      const medicines = [
+        {name: "Ibuprofen", dosage: 100},
+        {name: "Omega-3", dosage:250}
+      ]
+      await LogService.create(patient, 10, FoodIntake.Breakfast, Vital.Stable, medicines, 3, 3,
+                              "Jane went for a walk today.")
+      setMessage('added log!')
+    } catch (error) {
+      console.log(error)
+      setMessage(error.message)
+    }
+  }
+
+  const getLog = async () => {
+    try {
+      const patient = await PatientService.get(caregiver)
+      const logs = await LogService.get(patient)
+      setMessage('fetched log!')
+      console.log(logs)
+    } catch (error) {
+      console.log(error)
+      setMessage(error.message)
+    }
+  }
+
   return (
     <View style={styles.container}>
       <Text>{message}</Text>
@@ -136,6 +165,8 @@ export default function App() {
       <Button title="generate Token" onPress={generateToken}/>
       <Button title="create Guardian" onPress={createGuardian}/>
       <Button title="get Guardian" onPress={getGuardian}/>
+      <Button title="add Log" onPress={addLog}/>
+      <Button title="get Log" onPress={getLog}/>
     </View>
   );
 }
