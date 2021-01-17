@@ -223,5 +223,6 @@ const styles = StyleSheet.create({
         marginVertical: 9,
         borderColor: 'grey', 
         borderWidth: .5,
+        textAlign: 'center'
     }
 })

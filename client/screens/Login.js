@@ -67,12 +67,8 @@ const styles = StyleSheet.create({
     buttonText:{
         color:'white',
         fontSize: 15,
-        lineHeight: 40
-    },
-
-    buttonContainer:{
-        justifyContent: 'center',
-        alignItems: 'center'
+        lineHeight: 35,
+        left: 43
     },
 
     button:{
@@ -80,7 +76,7 @@ const styles = StyleSheet.create({
         width: 130,
         height: 38,
         left: 142,
-        top: 450,
+        top: 500,
         backgroundColor: '#83E1FF', 
         borderRadius: 19
     },
@@ -89,7 +85,7 @@ const styles = StyleSheet.create({
         paddingLeft: 14,
         height: 38,
         left: 26,
-        top: 306,
+        top: 286,
         marginRight: 60,
         marginVertical: 13,
         borderRadius: 9,
@@ -100,24 +96,24 @@ const styles = StyleSheet.create({
 
     footer:{
         position: 'absolute',
-        top: 650,
-        fontSize: 12,
-        left: 142,
+        top: 700,
+        fontSize: 15,
+        left: 130,
 
     },
     signUpText:{
-        top: 550,
-        fontSize: 17,
+        top: 540,
+        fontSize: 20,
         color: '#83E1FF',
         textDecorationLine: 'underline',
-        left: 179,
+        left: 170,
     },
     logo:{
-        width: 200,
-        height: 200,
+        width: 70,
+        height: 65,
         resizeMode: 'stretch',
-        left: 30,
-        top: 300
+        left: 165,
+        top: 280
     }
 
 }); 
