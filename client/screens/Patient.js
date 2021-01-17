@@ -6,7 +6,7 @@ import { Icon } from 'react-native-elements';
 import CaregiverService from '../api/caregiverService'
 import AuthService from '../api/authService'
 
-export const Caregiver = ({navigation}) => {
+export const Patient = ({navigation}) => {
     const [firstName, setFirstName] = React.useState(''); 
     const [lastName, setLastName] = React.useState(''); 
     const [email, setEmail] = React.useState(''); 
@@ -18,6 +18,10 @@ export const Caregiver = ({navigation}) => {
     const [selAvatar2, setSelAvatar2] = React.useState(false);
     const [selAvatar3, setSelAvatar3] = React.useState(false);
     const [selAvatar4, setSelAvatar4] = React.useState(false);
+    const [selAvatar5, setSelAvatar5] = React.useState(false);
+    const [selAvatar6, setSelAvatar6] = React.useState(false);
+    const [selAvatar7, setSelAvatar7] = React.useState(false);
+    const [selAvatar8, setSelAvatar8] = React.useState(false);
     const [avatarState, setAvatarState] = React.useState(0); 
 
     const backButton = () => { navigation.pop()};    
@@ -121,8 +125,6 @@ export const Caregiver = ({navigation}) => {
                         </TouchableHighlight>
                     </View>
 
-                    
-
                     <KeyboardAwareScrollView>
                         <Text style = {styles.subTitle}>INFORMATION</Text>
                         <TextInput 
@@ -141,56 +143,12 @@ export const Caregiver = ({navigation}) => {
                                 value={lastName}
                                 color = 'black'
                         />
-                        <TextInput 
-                                style={styles.input}
-                                placeholder='E-mail'
-                                placeholderTextColor="#ababab"
-                                onChangeText={(text) => setEmail(text)}
-                                value={email}
-                                color = 'black'
-                        />
-                        <TextInput 
-                                style={styles.input}
-                                placeholder='Password'
-                                placeholderTextColor="#ababab"
-                                onChangeText={(text) => setPassword(text)}
-                                value={password}
-                                secureTextEntry={true}
-                                color = 'black'
-                        />
-                        <TextInput 
-                                style={styles.input}
-                                placeholder='Confirm Password'
-                                placeholderTextColor="#ababab"
-                                onChangeText={(text) => setPassVerify(text)}
-                                value={passVerify}
-                                secureTextEntry={true}
-                                color = 'black'
-                        />
-                        <Text style = {styles.subTitle}>VERIFICATION</Text>
-                        <TextInput 
-                                style={styles.input}
-                                placeholder='Place of Work'
-                                placeholderTextColor="#ababab"
-                                onChangeText={(text) => setPlaceOfWork(text)}
-                                value={placeOfWork}
-                                color = 'black'
-                        />
-
-                        <TextInput 
-                                style={styles.input}
-                                placeholder='Education'
-                                placeholderTextColor="#ababab"
-                                onChangeText={(text) => setEducation(text)}
-                                value={education}
-                                color = 'black'
-                        />
                     </KeyboardAwareScrollView>
                     <TouchableOpacity 
                         style = {styles.button}
                         onPress = {registerUser}>
                         <View style = {styles.buttonContainer}>
-                            <Text style = {styles.buttonText}>Log In</Text>
+                            <Text style = {styles.buttonText}>Create</Text>
                         </View>
                     </TouchableOpacity>
             </View>

@@ -6,16 +6,14 @@ export const Login = ({navigation}) => {
     const [email, setEmail] = React.useState('');
     const [password, setPassword] = React.useState('');
 
-    const authService = new AuthService()
-
     const pressHandler = () => {
         navigation.navigate('Select')
     }
 
     const signIn = () => {
-        authService.signIn(email, password)
+        AuthService.signIn(email, password)
           .then(userCredential => {
-            console.log(userCredential.user.email)
+            console.log('success')
           })
           .catch(error => {
             console.log(error.message)
@@ -43,7 +41,6 @@ export const Login = ({navigation}) => {
                 placeholderTextColor="#ababab"
                 onChangeText={(text) => setEmail(text)}
                 value={email}
-                color = '#ABABAB'
             />
             </View>
 
@@ -53,7 +50,7 @@ export const Login = ({navigation}) => {
                     placeholderTextColor="#ababab"
                     onChangeText={(text) => setPassword(text)}
                     value={password}
-                    color = '#ABABAB'
+                    secureTextEntry={true}
             />
 
             <TouchableOpacity

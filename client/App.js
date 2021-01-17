@@ -1,9 +1,10 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import { DashboardStack } from "./navigation/DashboardStack";
+//import { DashboardStack } from "./navigation/DashboardStack";
 import { NavigationContainer } from '@react-navigation/native';
 import {LogStack} from './routes/LogStack'
+import {Patient} from '../screens/Patient';
 
 export default function App() {
   return (
@@ -12,7 +13,7 @@ export default function App() {
         {/*  <DashboardStack/>*/}
         {/*</NavigationContainer>*/}
         <NavigationContainer>
-            <LogStack/>
+            <Patient/>
         </NavigationContainer>
       <StatusBar style="auto" />
     </View>
