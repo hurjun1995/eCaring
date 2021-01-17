@@ -86,7 +86,7 @@ export const Gaurdian = ({navigation}) => {
                                     value={friendCode}
                                     color = 'black'
                             />
-                            <Text style={{textAlign: 'center'}}> Enter 4-Digit code above</Text>
+                            <Text style={{textAlign: 'center', fontSize:10, color:"#4B4B4B"}}> Enter 4-Digit code above</Text>
                             {/* <SafeAreaView style={styles.root}>
                                 <CodeField
                                     ref={ref}
@@ -127,7 +127,8 @@ const styles = StyleSheet.create({
         fontSize: 25,
         lineHeight: 40,
         left: 27,
-        color: '#515C77'
+        color: '#515C77',
+        fontWeight:"500"
     },cell: {
         width: 25,
         height: 30,
@@ -143,7 +144,10 @@ const styles = StyleSheet.create({
         lineHeight: 18,
         color: '#8A8A8A',
         left: 27,
-        paddingVertical: 14
+        paddingVertical: 14,
+        fontWeight:"600",
+        marginBottom: -10,
+        marginTop:10
     },
     container:{
         backgroundColor: '#FBFBFB',
@@ -182,16 +186,18 @@ const styles = StyleSheet.create({
         position:'absolute',
         width: 130,
         height: 38,
-        top: 400,
         backgroundColor: '#83E1FF',
         borderRadius: 19,
         left: 140,
-        top: 620
+        top: 730
     },
     verifyExplain:{
         textAlign: 'center',
-        paddingHorizontal: 30,
-        fontSize: 12
+        fontSize: 12,
+        width:311,
+        alignSelf:"center",
+        paddingTop:16,
+        color:"#4B4B4B"
     },
     box:{
         width: 70,
@@ -221,15 +227,15 @@ const styles = StyleSheet.create({
         top: 70
     },
     Code:{
-        width: '45%',
-        paddingLeft: 14,
-        height: 38,
-        left: 120,
-        marginRight: 60,
-        borderRadius: 9,
-        marginVertical: 9,
-        borderColor: 'grey',
-        borderWidth: .5,
-        textAlign: 'center'
+        width: '85%',
+        height: 90,
+        borderRadius: 15,
+        borderColor: '#C7D6FF',
+        borderWidth: 2,
+        textAlign: 'center',
+        alignSelf: "center",
+        justifyContent: "center",
+        marginTop:14,
+        marginBottom:14
     }
 })
