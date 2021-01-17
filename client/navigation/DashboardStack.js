@@ -4,6 +4,7 @@ import { Dashboard } from "../screens/Dashboard";
 import { LogForm } from "../screens/LogForm";
 import { FriendCode } from "../screens/FriendCode";
 import { LogDisplay } from "../screens/LogDisplay";
+import { Analytics } from "../screens/Analytics";
 
 const Stack = createStackNavigator();
 
@@ -39,6 +40,17 @@ const DashboardStack = (props) => {
                               headerLeft: null
                           }}/>
             <Stack.Screen name="LogDisplay" component={LogDisplay}
+                          initialParams={{data: props.data}}
+                          options={{
+                              title: null,
+                              headerStyle: {
+                                  backgroundColor: '#fff',
+                                  height: 0
+                              },
+                              headerLeft: null,
+                              gesturesEnabled: false
+                          }}/>
+            <Stack.Screen name="Analytics" component={Analytics}
                           initialParams={{data: props.data}}
                           options={{
                               title: null,

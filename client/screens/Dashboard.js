@@ -11,7 +11,7 @@ export const Dashboard = ({navigation, props, route}) => {
             <View style={styles.buttonContainer}>
                 <Icon reverse color="#83E1FF" size={18} name="group-add" onPress={() => navigation.navigate('FriendCode')}/>
                 <View style={{marginLeft: -7, marginRight:-7}}>
-                    <Icon reverse color="#83E1FF" size={18} name="leaderboard"/>
+                    <Icon reverse color="#83E1FF" size={18} name="leaderboard" onPress={() => navigation.navigate('Analytics')}/>
                 </View>
                 <Icon reverse color="#83E1FF" size={18} name="chat"/>
             </View>
