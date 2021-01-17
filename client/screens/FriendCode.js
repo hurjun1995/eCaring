@@ -9,7 +9,7 @@ export const FriendCode = ({navigation}) => {
       let codeArr = [];
       for(let i=0; i<strCode.length; i++){
           codeArr.push(
-              <View>
+              <View key={i}>
               <Text style={{fontWeight:"500", fontSize:40, color:"#4B4B4B"}}>{strCode[i]}</Text>
               </View>
           )
