@@ -7,14 +7,15 @@ import { StyleSheet, Text, View, Button } from 'react-native';
 import AuthService from './api/authService'
 import CaregiverService from './api/caregiverService'
 import PatientService from './api/patientService'
-
-import * as c from './api/constants'
+import GuardianService from './api/guardianService'
 
 export default function App() {
   const [message, setMessage] = useState("placeholder")
   const [caregiver, setCaregiver] = useState({})
+  const [token, setToken] = useState("")
+  const [client, setClient] = useState({})
 
-  const email = "test9@example.com"
+  const email = "test14@example.com"
   const password = "testpass"
   const signUp = () => {
     AuthService.createUser(email, password)
@@ -27,8 +28,9 @@ export default function App() {
   }
   const signIn = () => {
     AuthService.signIn(email, password)
-      .then(user => {
-        setMessage(user.toString())
+      .then(theClient => {
+        setMessage(theClient.toString())
+        setClient(theClient)
       })
       .catch(error => {
         setMessage(error.message)
@@ -90,6 +92,36 @@ export default function App() {
       })
   }
 
+  const generateToken = async () => {
+    try {
+      const patient = await PatientService.get(caregiver)
+      const token = await PatientService.generateToken(patient)
+      setMessage(token)
+      setToken(token)
+    } catch (error) {
+      console.log(error)
+      setMessage(error.message)
+    }
+  }
+
+  const createGuardian = async () => {
+    try {
+      const guardian = await GuardianService.create("David", "Kim", token)
+      setMessage(guardian.toString())
+    } catch (error) {
+      setMessage(error.message)
+    }
+  }
+
+  const getGuardian = async () => {
+    try {
+      const guardian = await GuardianService.get()
+      setMessage(guardian.toString())
+    } catch (error) {
+      setMessage(error.message)
+    }
+  }
+
   return (
     <View style={styles.container}>
       <Text>{message}</Text>
@@ -101,6 +133,9 @@ export default function App() {
       <Button title="get caregiver" onPress={getCaregiver}/>
       <Button title="create patient" onPress={createPatient}/>
       <Button title="get patient" onPress={getPatient}/>
+      <Button title="generate Token" onPress={generateToken}/>
+      <Button title="create Guardian" onPress={createGuardian}/>
+      <Button title="get Guardian" onPress={getGuardian}/>
     </View>
   );
 }

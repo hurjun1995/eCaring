@@ -1,7 +1,8 @@
 import firebase from './firebase'
 import Patient from '../model/patient'
 import CaregiverService from './caregiverService'
-import { PATIENT_COLLECTION, CAREGIVER_COLLECTION } from './constants'
+import { PATIENT_COLLECTION, CAREGIVER_COLLECTION, PATIENT_TOKEN_COLLECTION,
+         ERROR_INVALID_PATIENT_TOKEN } from './constants'
 
 
 class PatientService {
@@ -83,6 +84,71 @@ class PatientService {
         const data = docSnapshot.data()
         return new Patient(caregiver.patientUID, data['firstName'], data['lastName'], data['caregiverUID'])
       })
+  }
+
+  /**
+   * Try get a 4 digits token for patient from DB.
+   * If not present, generate one.
+   * @param {Object} patient 
+   */
+  static async generateToken(patient) {
+    patientTokenRef = firebase.firestore().collection(PATIENT_TOKEN_COLLECTION)
+
+    // check if a token for given patient exists
+    const token = await patientTokenRef.where('patientUID', '==', patient.UID).limit(1).get()
+    if (!token.empty) {
+      let selectedTokenDigits = 0
+      token.forEach(selectedToken => {
+        console.log(selectedToken.id)
+        console.log(selectedToken.data())
+        const patientTokenDocRef = patientTokenRef.doc(selectedToken.id)
+        patientTokenDocRef.set({"patientUID": patient.UID, "lastUsedAt": Date.now()})
+        selectedTokenDigits = parseInt(selectedToken.id)
+      })
+      return selectedTokenDigits
+    }
+
+    // if not, create one
+    while (true) {
+      const tokenCandidate = this.generateRandom4DigitsTokenCandidate().toString()
+      const patientTokenDocRef = patientTokenRef.doc(tokenCandidate)
+      const docSnapshot = await patientTokenDocRef.get()
+      if (docSnapshot.exists) {
+          // generate a new token candidate
+          continue;
+      } else {
+        patientTokenDocRef.set({"patientUID": patient.UID, "lastUsedAt": Date.now()})
+        return parseInt(tokenCandidate)
+      }
+    }
+  }
+
+  static generateRandom4DigitsTokenCandidate() {
+    let candidate = 0
+    while (candidate < 1000) {
+      candidate = Math.floor(Math.random() * 10000)
+    }
+
+    return candidate
+  }
+
+  /**
+   * Given 4-digits token, check if it's valid
+   * If valid, return the associated patient's UID
+   * throw ERROR_INVALID_PATIENT_TOKEN otherwise.
+   * @param {int} token 
+   */
+  static async checkToken(token) {
+    const patientTokenRef = firebase.firestore().collection(PATIENT_TOKEN_COLLECTION).doc(token.toString())
+    const docSnapshot = await patientTokenRef.get()
+    if (!docSnapshot.exists) {
+      const error = Error("Given token is not valid.")
+      error.code = ERROR_INVALID_PATIENT_TOKEN
+      throw error
+    } else {
+      const token = docSnapshot.data()
+      return token['patientUID']
+    }
   }
 }
 
