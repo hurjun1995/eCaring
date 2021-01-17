@@ -50,6 +50,8 @@ export const LogForm = ({navigation}) => {
 
     const vis = () => {
         setVisible(!visible);
+        setMedDose("");
+        setMedName("");
     };
 
     const addMeds = visible ? (
