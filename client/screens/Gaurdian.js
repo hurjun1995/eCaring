@@ -169,7 +169,8 @@ const styles = StyleSheet.create({
     buttonText:{
         color:'white',
         fontSize: 15,
-        lineHeight: 40
+        lineHeight: 40,
+        fontWeight:"600"
     },
 
     buttonContainer:{
