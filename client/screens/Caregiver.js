@@ -20,6 +20,7 @@ export const Caregiver = ({navigation}) => {
     const [selAvatar3, setSelAvatar3] = React.useState(false);
     const [selAvatar4, setSelAvatar4] = React.useState(false);
     const [avatarState, setAvatarState] = React.useState(0);
+    const [error, setError] = React.useState(false);
 
     const backButton = () => { navigation.pop()};
 
@@ -52,9 +53,14 @@ export const Caregiver = ({navigation}) => {
             await createCaregiver();
             toPatient();
           } else {
+            setError(true);
             console.log('passwords dont match')
           }
     }
+
+    const errorMsg = error ? (
+        <Text style={{color:"#FF7676", fontWeight:"600", fontSize:12, letterSpacing:0.8, left: 30,}}>PASSWORDS DON'T MATCH.</Text>
+    ): (<Text/>);
 
     const changeAvatar1 = () => { setSelAvatar1(!selAvatar1); setAvatarState(1), console.log(avatarState)}
     const changeAvatar2 = () => { setSelAvatar2(!selAvatar2); setAvatarState(2), console.log(avatarState)}
@@ -172,6 +178,7 @@ export const Caregiver = ({navigation}) => {
                                 secureTextEntry={true}
                                 color = 'black'
                         />
+                        {errorMsg}
                         <Text style = {styles.subTitle}>VERIFICATION</Text>
                         <TextInput
                                 style={styles.input}
