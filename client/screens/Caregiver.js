@@ -57,7 +57,7 @@ export const Caregiver = ({navigation}) => {
     const changeAvatar4 = () => { setSelAvatar4(true); setAvatarState(4), console.log(avatarState)}
 
     return(
-        <View style={{backgroundColor:"#FBFBFB"}}>
+        <View style={{backgroundColor:"#FBFBFB", height:"100%"}}>
             <TouchableOpacity style={styles.backButton} onPress = {backButton}>
                 <Icon name="navigate-before"/>
             </TouchableOpacity>
