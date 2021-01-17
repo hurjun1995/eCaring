@@ -3,6 +3,7 @@ import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { DashboardStack } from "./navigation/DashboardStack";
 import { NavigationContainer } from '@react-navigation/native';
+import {LogStack} from './routes/LogStack'
 
 export default function App() {
     const data = [
@@ -40,8 +41,11 @@ export default function App() {
 
   return (
     <View style={styles.container}>
+        {/*<NavigationContainer>*/}
+        {/*  <DashboardStack data={data}/>*/}
+        {/*</NavigationContainer>*/}
         <NavigationContainer>
-          <DashboardStack data={data}/>
+            <LogStack/>
         </NavigationContainer>
       <StatusBar style="auto" />
     </View>
@@ -50,6 +54,7 @@ export default function App() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
+    backgroundColor: '#fff',
   },
 });

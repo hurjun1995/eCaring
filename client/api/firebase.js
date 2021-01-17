@@ -15,6 +15,7 @@ var firebaseConfig = {
   appId: FIREBASE_APP_ID,
   measurementId: `G-${FIREBASE_MEASUREMENT_ID}`
 };
+console.log('FIREBASE_API_KEY');
 firebase.initializeApp(firebaseConfig);
 
 export default firebase
