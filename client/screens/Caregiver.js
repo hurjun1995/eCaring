@@ -212,9 +212,10 @@ const styles = StyleSheet.create({
         fontSize: 12,
         lineHeight: 18,
         color: '#8A8A8A',
-        left: 27,
+        left: 30,
         paddingVertical: 14,
-        fontWeight:"600"
+        fontWeight:"600",
+        marginBottom: -10
     },
     container:{
         backgroundColor: '#FBFBFB',
@@ -250,7 +251,9 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         width:"80%",
-        left: '5%'
+        left: '5%',
+        marginBottom:16,
+        marginTop:10
     },
     buttonText:{
         color:'white',
