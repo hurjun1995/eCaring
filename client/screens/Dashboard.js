@@ -60,7 +60,7 @@ export const Dashboard = ({navigation}) => {
         let hearts = [];
         for(let i=0; i<num; i++){
             hearts.push(
-                <Icon name="favorite" color="#FF7676"/>
+                <Icon name="favorite" color="#FF7676" key={i}/>
             )
         }
         let message = [];
