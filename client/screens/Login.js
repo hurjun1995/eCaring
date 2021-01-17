@@ -1,9 +1,9 @@
-import React from 'react'; 
-import { View, Text, StyleSheet, TextInput, TouchableOpacity, ScrollView, Image} from 'react-native'; 
+import React from 'react';
+import { View, Text, StyleSheet, TextInput, TouchableOpacity, ScrollView, Image} from 'react-native';
 import AuthService from '../api/authService'
 
 export const Login = ({navigation}) => {
-    const [email, setEmail] = React.useState(''); 
+    const [email, setEmail] = React.useState('');
     const [password, setPassword] = React.useState('');
 
     const pressHandler = () => {
@@ -23,16 +23,28 @@ export const Login = ({navigation}) => {
     return(
         <View style = {styles.container}>
 
+            <Image source={require('../assets/lady4.png')} style={{position: "absolute",
+                width: 200,
+                height: 210,
+                top: 90,
+                left: 125,}}/>
+            <Image source={require('../assets/man1.png')} style={{position: "absolute",
+                width: 200,
+                height: 210,
+                top: 90,
+                right: 0,}}/>
             <Image style={styles.logo} source={require('../assets/eCaring_logo-09.png')}/>
-            <TextInput 
+            <View style={styles.inputBox}>
+            <TextInput
                 style={styles.input}
                 placeholder='E-mail'
                 placeholderTextColor="#ababab"
                 onChangeText={(text) => setEmail(text)}
                 value={email}
             />
+            </View>
 
-            <TextInput 
+            <TextInput
                     style={styles.input}
                     placeholder='Password'
                     placeholderTextColor="#ababab"
@@ -41,7 +53,7 @@ export const Login = ({navigation}) => {
                     secureTextEntry={true}
             />
 
-            <TouchableOpacity 
+            <TouchableOpacity
                 style = {styles.button}
                 onPress={signIn}
                 >
@@ -50,68 +62,79 @@ export const Login = ({navigation}) => {
                 </View>
             </TouchableOpacity>
 
-                
+
             <Text style = {styles.footer}>Don't have an account?</Text>
-            <TouchableOpacity 
+            <TouchableOpacity
                 onPress={pressHandler}>
                 <Text style = {styles.signUpText}>Sign Up</Text>
             </TouchableOpacity>
         </View>
     )
-}; 
+};
 
 const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: '#FBFBFB',
+    },
     buttonText:{
         color:'white',
         fontSize: 15,
         lineHeight: 35,
-        left: 43
+        left: 43,
+        fontWeight:"600"
     },
 
     button:{
         position:'absolute',
         width: 130,
         height: 38,
-        left: 142,
-        top: 500,
-        backgroundColor: '#83E1FF', 
-        borderRadius: 19
+        top: 535,
+        backgroundColor: '#83E1FF',
+        borderRadius: 19,
+        alignSelf: "center"
     },
     input:{
         width: '85%',
         paddingLeft: 14,
         height: 38,
         left: 26,
-        top: 286,
+        top: 320,
         marginRight: 60,
         marginVertical: 13,
         borderRadius: 9,
-        borderColor: 'grey', 
-        borderWidth: .5,
-        color: 'black'
-    },  
+        backgroundColor: '#fff',
+        shadowOffset: {
+            width: 0,
+            height: 4,
+        },
+        shadowOpacity: 0.25,
+        fontWeight:"600",
+        fontSize:15
+    },
 
 
     footer:{
         position: 'absolute',
         top: 700,
-        fontSize: 15,
-        left: 130,
-
+        fontSize: 12,
+        color:"#4B4B4B",
+        fontWeight:"400",
+        alignSelf:"center"
     },
     signUpText:{
-        top: 540,
-        fontSize: 20,
+        top: 535,
+        fontSize: 17,
         color: '#83E1FF',
         textDecorationLine: 'underline',
-        left: 170,
+        alignSelf:"center",
+        fontWeight:"600"
     },
     logo:{
-        width: 70,
+        width: 65,
         height: 65,
-        resizeMode: 'stretch',
-        left: 165,
-        top: 280
+        top: 310,
+        alignSelf: "center"
     }
 
-}); 
+});

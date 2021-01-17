@@ -5,6 +5,7 @@ import { StyleSheet, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import {LogStack} from './routes/LogStack'
 //import {Patient} from '../screens/Patient';
+import {Patient} from './screens/Patient';
 
 export default function App() {
   return (

@@ -1,5 +1,5 @@
-import React from 'react'; 
-import { View, Text, TouchableOpacity, StyleSheet} from 'react-native'; 
+import React from 'react';
+import { View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 import { Icon } from 'react-native-elements'
 
 
@@ -15,12 +15,12 @@ export const AccSelect = ({navigation}) => {
             </TouchableOpacity>
             <View style = {styles.container}>
                 <Text style = {styles.title}>Select your credentials.</Text>
-                <TouchableOpacity 
+                <TouchableOpacity
                     style = {styles.button}
                     onPress = {pressGaurdian}>
                     <Text style = {styles.buttonText}>Gaurdian</Text>
                 </TouchableOpacity>
-                <TouchableOpacity 
+                <TouchableOpacity
                     style = {styles.button}
                     onPress = {pressCaregiver}
                     >
@@ -29,7 +29,7 @@ export const AccSelect = ({navigation}) => {
             </View>
         </View>
     )
-}; 
+};
 
 const styles = StyleSheet.create({
     container:{
@@ -40,10 +40,11 @@ const styles = StyleSheet.create({
     },
     buttonText:{
         color:'white',
-        fontSize: 15, 
+        fontSize: 15,
+        fontWeight:"600"
     },
     button:{
-        backgroundColor: '#83E1FF', 
+        backgroundColor: '#83E1FF',
         width: 197,
         height: 38,
         marginRight: 30,
@@ -51,17 +52,19 @@ const styles = StyleSheet.create({
         top: 275,
         marginVertical: 10,
         borderRadius: 20,
-        alignItems: 'center', 
+        alignItems: 'center',
         justifyContent: 'center',
     },
     title:{
         position: 'absolute',
         fontSize: 12,
         lineHeight: 18,
-        top:250,
-    }, 
+        top:240,
+        fontWeight:"400",
+        color:"#4B4B4B"
+    },
     backButton:{
-        top: 60, 
+        top: 60,
         left: -170
     }
 });
