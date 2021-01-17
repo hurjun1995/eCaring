@@ -21,32 +21,34 @@ export const Gaurdian = ({navigation}) => {
 
     const createGuardian = async () => {
         try {
-          const guardian = await GuardianService.create(firstName, lastName, parseInt(friendCode))
-          setMessage(guardian.toString())
-          toDash()
+          const guardian = await GuardianService.create(firstName, lastName, parseInt(friendCode));
+          console.log(guardian.toString());
+          toDash();
         } catch (error) {
-          setMessage(error.message)
+          console.log(error.message)
         }
     }
 
-    const signUp = () => {
-        AuthService.createUser(email, password)
-          .then(userCredential => {
-            console.log(userCredential.user.email)
-          })
-          .catch(error => {
-            console.log(error.message)
-          })
-      }
+    
+    const signUp = async () => {
+        try {
+            await AuthService.createUser(email, password);
+            await AuthService.signIn(email, password);
+        } catch (error) {
+            console.log(error.code);
+        }
+    }
+      
 
 
-    const registerUser = () => {
+    const registerUser = async () => {
         if (passVerify == password) {
-            signUp(); 
-            createGuardian();
-            } else {
-                console.log('passwords dont match')
-            }
+            await signUp();
+            await createGuardian();
+            toDash();
+          } else {
+            console.log('passwords dont match')
+          }
     }
 
     return(
@@ -55,9 +57,9 @@ export const Gaurdian = ({navigation}) => {
                         <Icon name="navigate-before"/>
                 </TouchableOpacity>
                 <View style = {styles.container}>
-                    <Text style = {styles.title}>Gaurdian Profile </Text>
+                    <Text style = {styles.title}>Guardian Profile </Text>
                         <KeyboardAwareScrollView>
-                            <Text style = {styles.subTitle}>INFORMATION</Text>
+                            <Text style = {styles.subTitle}>INFORrMATION</Text>
                             <TextInput
                                     style={styles.input}
                                     placeholder='First Name'
