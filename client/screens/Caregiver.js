@@ -35,7 +35,7 @@ export const Caregiver = ({navigation}) => {
     const createCaregiver = () => {
         CaregiverService.create(firstName, lastName, placeOfWork, education)
         .then(caregiver =>{
-            console.log(caregiver.toString())
+            console.log('hello')
         })
         .catch(error => {
             console.log(error.message)
