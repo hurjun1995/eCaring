@@ -9,8 +9,13 @@ import LogService from '../api/LogService'
 
 export const Dashboard = ({navigation}) => {
     
-    caregiver = await CaregiverService.get()
-    patient = await PatientService.get()
+    let caregiver
+    let patient
+    const setCaregiverAndPatient = async () => {
+        caregiver = await CaregiverService.get()
+        patient = await PatientService.get()
+    }
+    setCaregiverAndPatient()
 
     const profile = (
         <View style={styles.profile}>
@@ -27,43 +32,43 @@ export const Dashboard = ({navigation}) => {
     );
 
     const data = LogService.get(patient)
-    const data = [
-        {
-            mentalHealth: 3,
-            month: "january",
-            dayNum: "15",
-            dayStr: "FRI",
-            id:1
-        },
-        {
-            mentalHealth: 4,
-            month: "january",
-            dayNum: "14",
-            dayStr: "THU",
-            id:2
-        },
-        {
-            mentalHealth: 5,
-            month: "january",
-            dayNum: "13",
-            dayStr: "WED",
-            id:3
-        },
-        {
-            mentalHealth: 1,
-            month: "january",
-            dayNum: "12",
-            dayStr: "TUE",
-            id:4
-        },
-        {
-            mentalHealth: 5,
-            month: "january",
-            dayNum: "11",
-            dayStr: "MON",
-            id:5
-        }
-    ];
+    // const data = [
+    //     {
+    //         mentalHealth: 3,
+    //         month: "january",
+    //         dayNum: "15",
+    //         dayStr: "FRI",
+    //         id:1
+    //     },
+    //     {
+    //         mentalHealth: 4,
+    //         month: "january",
+    //         dayNum: "14",
+    //         dayStr: "THU",
+    //         id:2
+    //     },
+    //     {
+    //         mentalHealth: 5,
+    //         month: "january",
+    //         dayNum: "13",
+    //         dayStr: "WED",
+    //         id:3
+    //     },
+    //     {
+    //         mentalHealth: 1,
+    //         month: "january",
+    //         dayNum: "12",
+    //         dayStr: "TUE",
+    //         id:4
+    //     },
+    //     {
+    //         mentalHealth: 5,
+    //         month: "january",
+    //         dayNum: "11",
+    //         dayStr: "MON",
+    //         id:5
+    //     }
+    // ];
 
     const mentalHealth = (num) => {
         let hearts = [];
