@@ -13,7 +13,7 @@ export default function App() {
         {/*  <DashboardStack/>*/}
         {/*</NavigationContainer>*/}
         <NavigationContainer>
-            <LogStack/>
+            <Patient/>
         </NavigationContainer>
       <StatusBar style="auto" />
     </View>
