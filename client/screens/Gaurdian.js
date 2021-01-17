@@ -1,80 +1,123 @@
-import React from 'react'; 
-import { render } from 'react-dom';
-import { View, Text, StyleSheet, TouchableOpacity, TextInput} from 'react-native'; 
+import React, {Fragment}  from 'react'; 
+import { View, Text, StyleSheet, TouchableOpacity, TextInput, SafeAreaView} from 'react-native'; 
 import { Icon } from 'react-native-elements'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+
+import {
+    CodeField,
+    Cursor,
+    useBlurOnFulfill,
+    useClearByFocusCell,
+  } from 'react-native-confirmation-code-field';
+
 
 export const Gaurdian = ({navigation}) => {
     const [firstName, setFirstName] = React.useState(''); 
     const [lastName, setLastName] = React.useState(''); 
     const [email, setEmail] = React.useState(''); 
     const [password, setPassword] = React.useState('');
-    const [placeOfWork, setPlaceOfWork] = React.useState('');
-    const [education, setEducation] = React.useState('');
+    const [passVerify, setPassVerify] = React.useState(''); 
+    const [friendCode, setFriendCode] = React.useState('');
     const backButton = () => { navigation.pop()};
+    const ref = useBlurOnFulfill({friendCode, cellCount: 4});
+    const [props, getCellOnLayoutHandler] = useClearByFocusCell({
+        friendCode,
+        setFriendCode,
+      });
     return(
         <View >
                 <TouchableOpacity style={styles.backButton} onPress = {backButton}>
                         <Icon name="navigate-before"/>
                 </TouchableOpacity>
                 <View style = {styles.container}>
-                <Text style = {styles.title}>Gaurdian Profile </Text>
-                <Text style = {styles.subTitle}>INFORMATION</Text>
-                <TextInput 
-                        style={styles.input}
-                        placeholder='First Name'
-                        placeholderTextColor="#ababab"
-                        onChangeText={(text) => setFirstName(text)}
-                        value={firstName}
-                        color = '#ABABAB'
-                />
-                <TextInput 
-                        style={styles.input}
-                        placeholder='Last Name'
-                        placeholderTextColor="#ababab"
-                        onChangeText={(text) => setLastName(text)}
-                        value={lastName}
-                        color = '#ABABAB'
-                />
-                <TextInput 
-                        style={styles.input}
-                        placeholder='E-mail Address'
-                        placeholderTextColor="#ababab"
-                        onChangeText={(text) => setEmail(text)}
-                        value={email}
-                        color = '#ABABAB'
-                />
-                <TextInput 
-                        style={styles.input}
-                        placeholder='Password'
-                        placeholderTextColor="#ababab"
-                        onChangeText={(text) => setPassword(text)}
-                        value={password}
-                        color = '#ABABAB'
-                />
-                <TextInput 
-                        style={styles.input}
-                        placeholder='Confirm Password'
-                        placeholderTextColor="#ababab"
-                        onChangeText={(text) => setPassword(text)}
-                        value={password}
-                        color = '#ABABAB'
-                />
-                <Text style = {styles.subTitle}>VERIFICATION</Text>
-                <Text style = {styles.verifyExplain}> Get in contact with the long term care nurse to generate a Friend Code</Text>
+                    <Text style = {styles.title}>Gaurdian Profile </Text>
+                        <KeyboardAwareScrollView>
+                            <Text style = {styles.subTitle}>INFORMATION</Text>
+                            <TextInput 
+                                    style={styles.input}
+                                    placeholder='First Name'
+                                    placeholderTextColor="#ababab"
+                                    onChangeText={(text) => setFirstName(text)}
+                                    value={firstName}
+                                    color = 'black'
+                            />
+                            <TextInput 
+                                    style={styles.input}
+                                    placeholder='Last Name'
+                                    placeholderTextColor="#ababab"
+                                    onChangeText={(text) => setLastName(text)}
+                                    value={lastName}
+                                    color = 'black'
+                            />
+                            <TextInput 
+                                    style={styles.input}
+                                    placeholder='E-mail Address'
+                                    placeholderTextColor="#ababab"
+                                    onChangeText={(text) => setEmail(text)}
+                                    value={email}
+                                    color = 'black'
+                            />
+                            <TextInput 
+                                    style={styles.input}
+                                    placeholder='Password'
+                                    placeholderTextColor="#ababab"
+                                    onChangeText={(text) => setPassword(text)}
+                                    secureTextEntry={true}
+                                    value={password}
+                                    color = 'black'
+                            />
+                            <TextInput 
+                                    style={styles.input}
+                                    placeholder='Confirm Password'
+                                    placeholderTextColor="#ababab"
+                                    onChangeText={(text) => setPassVerify(text)}
+                                    secureTextEntry={true}
+                                    value={passVerify}
+                                    color = 'black'
+                            />
+                            <Text style = {styles.subTitle}>VERIFICATION</Text>
+                            <Text style = {styles.verifyExplain}> Get in contact with the long term care nurse to generate a Friend Code</Text>
+                            <TextInput 
+                                    style={styles.Code}
+                                    placeholder='Enter Friend Code'
+                                    placeholderTextColor="#ababab"
+                                    onChangeText={(text) => setFriendCode(text)}
+                                    keyboardType="number-pad"
+                                    value={friendCode}
+                                    color = 'black'
+                            />
+                            <Text style={{textAlign: 'center'}}> Enter 4-Digit code above</Text>
+                            {/* <SafeAreaView style={styles.root}>
+                                <CodeField
+                                    ref={ref}
+                                    {...props}
+                                    value={friendCode}
+                                    onChangeText={setFriendCode}
+                                    cellCount={4}
+                                    keyboardType="number-pad"
+                                    textContentType="oneTimeCode"
+                                    renderCell={({index, symbol, isFocused}) => (
+                                        <Fragment key={index}>
+                                            <Text
+                                            key={`value-${index}`}
+                                            onLayout={getCellOnLayoutHandler(index)}>
+                                            {symbol || (isFocused ? <Cursor /> : null)}
+                                            </Text>
+                                        </Fragment>
+                                    )}
 
-                <View style = {styles.boxContainer}> 
-                    <TextInput style={styles.box}/>
-                    <TextInput style={styles.box}/>
-                    <TextInput style={styles.box}/>
-                    <TextInput style={styles.box}/>
+                                />
+                            </SafeAreaView> */}
+
+
+                        </KeyboardAwareScrollView>
+                  
                 </View>
-                <Text style={{textAlign: 'center'}}> Enter 4-Digit code above</Text>
                 <TouchableOpacity style = {styles.button}>
-                    <View style = {styles.buttonContainer}>
-                        <Text style = {styles.buttonText}>Submit</Text>
-                    </View>
+                        <View style = {styles.buttonContainer}>
+                            <Text style = {styles.buttonText}>Submit</Text>
+                        </View>
                 </TouchableOpacity>
-                </View>
         </View>
     )
 }
@@ -85,7 +128,16 @@ const styles = StyleSheet.create({
         lineHeight: 40,
         left: 27,
         color: '#515C77'
-    },
+    },cell: {
+        width: 25,
+        height: 30,
+        lineHeight: 28,
+        fontSize: 20,
+        borderWidth: 2,
+        borderRadius: 3,
+        borderColor: '#00000030',
+        textAlign: 'center',
+      },
     subTitle:{
         fontSize: 12,
         lineHeight: 18,
@@ -123,7 +175,7 @@ const styles = StyleSheet.create({
         position:'absolute',
         width: 130,
         height: 38,
-        top: 450,
+        top: 400,
         backgroundColor: '#83E1FF', 
         borderRadius: 19,
         left: 140,
@@ -159,6 +211,17 @@ const styles = StyleSheet.create({
         left: -170
     },
     container:{
-        top: 60
+        top: 70
+    },
+    Code:{
+        width: '45%',
+        paddingLeft: 14,
+        height: 38,
+        left: 120,
+        marginRight: 60,
+        borderRadius: 9,
+        marginVertical: 9,
+        borderColor: 'grey', 
+        borderWidth: .5,
     }
 })

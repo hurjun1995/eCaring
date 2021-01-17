@@ -1,0 +1,6 @@
+{
+  "UID": "string (Document name)",
+  "first_name": "string",
+  "last_name": "string",
+  "patient_UID": "string"
+}

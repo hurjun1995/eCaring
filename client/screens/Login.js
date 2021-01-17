@@ -1,30 +1,31 @@
 import React from 'react'; 
 import { View, Text, StyleSheet, TextInput, TouchableOpacity, ScrollView, Image} from 'react-native'; 
-// import AuthService from './api/authService'
+import AuthService from '../api/authService'
 
 export const Login = ({navigation}) => {
     const [email, setEmail] = React.useState(''); 
     const [password, setPassword] = React.useState('');
 
-    // const authService = new AuthService()
+    const authService = new AuthService()
 
     const pressHandler = () => {
         navigation.navigate('Select')
     }
 
-    // const signIn = () => {
-    //     authService.signIn(email, password)
-    //       .then(userCredential => {
-    //         console.log('peepeepoo')
-    //         setMessage(userCredential.user.email)
-    //       })
-    //       .catch(error => {
-    //         setMessage(error.message)
-    //       })
-    //   }
+    const signIn = () => {
+        authService.signIn(email, password)
+          .then(userCredential => {
+            console.log(userCredential.user.email)
+          })
+          .catch(error => {
+            console.log(error.message)
+          })
+      }
 
     return(
         <View style = {styles.container}>
+
+            <Image style={styles.logo} source={require('../assets/eCaring_logo-09.png')}/>
             <TextInput 
                 style={styles.input}
                 placeholder='E-mail'
@@ -45,7 +46,7 @@ export const Login = ({navigation}) => {
 
             <TouchableOpacity 
                 style = {styles.button}
-                //onPress={signIn}
+                onPress={signIn}
                 >
                 <View style = {styles.buttonContainer}>
                     <Text style = {styles.buttonText}>Log In</Text>
@@ -110,6 +111,13 @@ const styles = StyleSheet.create({
         color: '#83E1FF',
         textDecorationLine: 'underline',
         left: 179,
+    },
+    logo:{
+        width: 200,
+        height: 200,
+        resizeMode: 'stretch',
+        left: 30,
+        top: 300
     }
 
 }); 
