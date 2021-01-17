@@ -1,7 +1,7 @@
 [
   {
     "createdAt": 1610867085859,
-    "foodIntakes": "Breakfast",
+    "foodIntakes": ["Breakfast", "Lunch"],
     "hydration": 10,
     "medicines": [
       {
@@ -20,7 +20,7 @@
   },
   {
     "createdAt": 1610867085859,
-    "foodIntakes": "Breakfast",
+    "foodIntakes": ["Breakfast", "Lunch"],
     "hydration": 10,
     "medicines": [
       {
