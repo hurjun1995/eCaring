@@ -13,6 +13,9 @@ export const Gaurdian = ({navigation}) => {
     const [password, setPassword] = React.useState('');
     const [passVerify, setPassVerify] = React.useState('');
     const [friendCode, setFriendCode] = React.useState('');
+    const [error, setError] = React.useState(false);
+    const [createGuardianError, setCreateGuardianError] = React.useState(false);
+    const [signUpError, setSignUpError] = React.useState(false);
     const backButton = () => { navigation.pop()};
 
     const toDash = () => {
@@ -49,7 +52,40 @@ export const Gaurdian = ({navigation}) => {
           } else {
             console.log('passwords dont match')
           }
+          setMessage(error.message)
+          setCreateGuardianError(true);
+        }
     }
+
+    const signUp = () => {
+        AuthService.createUser(email, password)
+          .then(userCredential => {
+            console.log(userCredential.user.email)
+          })
+          .catch(error => {
+            console.log(error.message)
+            setSignUpError(true)
+          })
+      }
+
+
+    const registerUser = () => {
+        if (passVerify === password) {
+            signUp();
+            createGuardian();
+            } else {
+                setError(true);
+                console.log('passwords dont match')
+            }
+    }
+
+    const errorMsg = error ? (
+        <Text style={{color:"#FF7676", fontWeight:"600", fontSize:12, letterSpacing:0.8, left: 30,}}>PASSWORDS DON'T MATCH.</Text>
+    ): (<Text/>);
+
+    const friendError = (createGuardianError || signUpError) ? (
+        <Text style={{color:"#FF7676", fontWeight:"600", fontSize:12, letterSpacing:0.8, textAlign:"center",marginTop:10}}>INVALID FRIEND CODE.</Text>
+    ): (<Text/>);
 
     return(
         <View style={{backgroundColor:"#FBFBFB", height:"100%"}}>
@@ -102,6 +138,7 @@ export const Gaurdian = ({navigation}) => {
                                     value={passVerify}
                                     color = 'black'
                             />
+                            {errorMsg}
                             <Text style = {styles.subTitle}>VERIFICATION</Text>
                             <Text style = {styles.verifyExplain}> Get in contact with the long term care nurse to generate a Friend Code</Text>
                             <TextInput
@@ -114,6 +151,7 @@ export const Gaurdian = ({navigation}) => {
                                     color = 'black'
                             />
                             <Text style={{textAlign: 'center', fontSize:10, color:"#4B4B4B"}}> Enter 4-Digit code above</Text>
+                            {friendError}
                             {/* <SafeAreaView style={styles.root}>
                                 <CodeField
                                     ref={ref}
@@ -216,7 +254,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#83E1FF',
         borderRadius: 19,
         left: 140,
-        top: 730
+        top: 750
     },
     verifyExplain:{
         textAlign: 'center',
