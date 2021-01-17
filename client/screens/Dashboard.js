@@ -1,7 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity, ScrollView, SafeAreaView } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
-import { Logo } from '../components/Logo';
 import { Avatar, Icon } from "react-native-elements";
 
 export const Dashboard = ({navigation}) => {
@@ -108,7 +107,7 @@ export const Dashboard = ({navigation}) => {
                 }}
             />
             <View style={styles.logo}>
-                <Logo/>
+                <Image source={require('../assets/logoNoText.png')} style={{width:41, height:41}}/>
             </View>
             <Image source={require("../assets/lady2.png")} style={styles.patientImg}/>
             {profile}
@@ -143,7 +142,7 @@ const styles = StyleSheet.create({
     },
     logo: {
         position: "absolute",
-        top: 60
+        top: 50
     },
     patientImg: {
         position: "absolute",

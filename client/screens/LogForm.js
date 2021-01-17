@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {StyleSheet, Text, View, TouchableOpacity, SafeAreaView, ScrollView, TextInput} from 'react-native';
-import { Icon, Slider, CheckBox, Rating } from "react-native-elements";
+import { Icon, Slider, CheckBox, Rating, Overlay } from "react-native-elements";
 import { LinearGradient } from "expo-linear-gradient";
 
 export const LogForm = ({navigation}) => {
@@ -20,19 +20,11 @@ export const LogForm = ({navigation}) => {
     const [pain, setPain] = useState(0);
 
     const [medicine, setMedicine] = useState([]);
+    const [visible, setVisible] = useState(false);
+    const [medName, setMedName] = useState("");
+    const [medDose, setMedDose] = useState("");
 
     const [notes, setNotes] = useState("");
-
-    const data = [
-        {
-            name: "Ibuprofen",
-            dosage: 100
-        },
-        {
-            name: "Omega-3",
-            dosage: 250
-        },
-    ];
 
     const logo = (
         <View style={{position:"absolute", top: 70, alignItems: 'center', justifyContent: 'center', flexDirection: 'row', flexWrap: 'wrap'}}>
@@ -41,14 +33,78 @@ export const LogForm = ({navigation}) => {
         </View>
     );
 
-    const takenMeds = data ? (data.map( meds => (
+    const takenMeds = medicine ? (medicine.map( meds => (
             <View style={[{backgroundColor:'#fff', borderColor:"#C7D6FF", borderLeftWidth:2, borderRightWidth:2, borderBottomWidth:2, borderTopWidth:72}, styles.vitalBox]} key={meds.name}>
                 <Icon name="clear" color={"#FF7676"} size={10} containerStyle={{borderWidth:1, borderRadius:20, borderColor:"#FF7676", position:"absolute", right:4, top:-65}}/>
                 <Text style={[{width:50, paddingTop:5, position:"absolute", top:-54}, styles.medicineText]}>{meds.name}</Text>
-                <Text style={styles.medicineDosage}>{meds.dosage} g</Text>
+                <Text style={styles.medicineDosage}>{meds.dosage} mg</Text>
             </View>
         ))
     ): <View/>;
+
+    const updateMeds = () => {
+        const newMed = {name: medName, dosage: medDose};
+        const newArr = [...medicine, newMed];
+        setMedicine(newArr);
+    };
+
+    const vis = () => {
+        setVisible(!visible);
+    };
+
+    const addMeds = visible ? (
+        <View style={styles.centeredView}>
+            <Overlay
+                animationType="fade"
+                transparent={true}
+                isVisible={visible}
+                fullScreen={true}
+                overlayStyle={{ backgroundColor: "rgba(0, 0, 0, 0.35)" }}
+            >
+                <View style={styles.centeredView}>
+                    <View style={styles.modalView}>
+                        <TouchableOpacity style={{position:"absolute", left:28, top:35, zIndex:99}} onPress={() => setVisible(!visible)}>
+                            <Icon name="navigate-before" color="#000"/>
+                        </TouchableOpacity>
+                        <Text style={{fontWeight:"600", fontSize:15, color:"#6067A9", textAlign:"center", paddingTop:15}}>Add Medicine</Text>
+                        <Text style={styles.inputLabel}>MEDICINE NAME</Text>
+                        <TextInput
+                            value={medName}
+                            onChangeText={(text) => {
+                                setMedName(text);
+                            }}
+                            style={styles.input}
+                        />
+                        <Text style={styles.inputLabel}>DOSAGE (mg)</Text>
+                        <TextInput
+                            value={medDose}
+                            onChangeText={(text) => {
+                                setMedDose(text);
+                            }}
+                            style={styles.input}
+                            keyboardType="decimal-pad"
+                        />
+                        <View style={styles.buttonContainer}>
+                            <TouchableOpacity
+                                onPress={() => {updateMeds(); vis()}}
+                                style={styles.saveButton}
+                            >
+                                <Text
+                                    style={{
+                                        color: "#fff",
+                                        fontSize: 16,
+                                        fontWeight: "600",
+                                    }}
+                                >
+                                    Save
+                                </Text>
+                            </TouchableOpacity>
+                        </View>
+                    </View>
+                </View>
+            </Overlay>
+        </View>
+    ): (<View/>);
 
     return (
       <View style={styles.container}>
@@ -68,7 +124,7 @@ export const LogForm = ({navigation}) => {
         </TouchableOpacity>
         {logo}
         <SafeAreaView style={styles.logForm}>
-            <ScrollView showsVerticalScrollIndicator={true} style={{padding:31}} showsVerticalScrollIndicator={false}>
+            <ScrollView style={{padding:31}} showsVerticalScrollIndicator={false}>
                 <Text style={styles.label}>HYDRATION</Text>
                 <Slider value={hydration}
                         onValueChange={(value) => setHydration(value)}
@@ -162,15 +218,16 @@ export const LogForm = ({navigation}) => {
                 </View>
 
                 <Text style={[styles.label, styles.spacedLabel]}>MEDICINE TAKEN</Text>
-                <ScrollView horizontal={true}>
+                <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
                     <View style={[{backgroundColor:'#fff', borderColor:"#C7D6FF", borderWidth:2}, styles.vitalBox]}>
-                        <TouchableOpacity style={{borderWidth:2, borderRadius:20, borderColor:"#6067A9"}}>
+                        <TouchableOpacity onPress={() => setVisible(!visible)} style={{borderWidth:2, borderRadius:20, borderColor:"#6067A9"}}>
                             <Icon name="add" size={20} color={"#6067A9"}/>
                         </TouchableOpacity>
                         <Text style={[{width:50, paddingTop:5}, styles.medicineText]}>Add Medicine</Text>
                     </View>
                     {takenMeds}
                 </ScrollView>
+                {addMeds}
 
                 <Text style={[styles.label, styles.spacedLabel]}>MENTAL HEALTH</Text>
                 <View style={styles.ratingBox}>
@@ -323,5 +380,50 @@ const styles = StyleSheet.create({
         color:"#8D9ABA",
         position:"absolute",
         bottom: 20
+    },
+    centeredView: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+    },
+    modalView: {
+        margin: 20,
+        backgroundColor: "#fff",
+        borderRadius: 41,
+        padding: 24,
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+        elevation: 5,
+        position: "relative",
+        height: 320,
+        width: 333,
+    },
+    inputLabel: {
+        fontSize: 12,
+        paddingBottom: 6,
+        fontWeight: "600",
+        color: "#8A8A8A",
+        letterSpacing: 0.8,
+        paddingTop: 20
+    },
+    input: {
+        borderRadius:10,
+        borderWidth:1,
+        borderColor:"#6067A9",
+        height:38,
+        width:293,
+        alignSelf: "center",
+        paddingLeft:15,
+        paddingRight:15,
+        paddingTop:8,
+        paddingBottom:8,
+        color: "#4B4B4B",
+        fontSize:15,
+        fontWeight:"600"
     }
 });
