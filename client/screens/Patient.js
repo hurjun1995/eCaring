@@ -61,7 +61,7 @@ export const Patient = ({navigation}) => {
     const changeAvatar4 = () => { setSelAvatar4(true); setAvatarState(4), console.log(avatarState)}
 
     return(
-        <View>
+        <View style={{backgroundColor:"#FBFBFB"}}>
             <TouchableOpacity style={styles.backButton} onPress = {backButton}>
                 <Icon name="navigate-before"/>
             </TouchableOpacity>

@@ -25,7 +25,7 @@ export const Gaurdian = ({navigation}) => {
         setFriendCode,
       });
     return(
-        <View >
+        <View style={{backgroundColor:"#FBFBFB", height:"100%"}}>
                 <TouchableOpacity style={styles.backButton} onPress = {backButton}>
                         <Icon name="navigate-before"/>
                 </TouchableOpacity>
