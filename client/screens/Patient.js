@@ -1,5 +1,5 @@
-import React from 'react'; 
-import { View, Text, StyleSheet, TouchableOpacity, TouchableHighlight, TextInput, Image} from 'react-native'; 
+import React from 'react';
+import { View, Text, StyleSheet, TouchableOpacity, TouchableHighlight, TextInput, Image} from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { Icon } from 'react-native-elements';
 
@@ -7,11 +7,11 @@ import CaregiverService from '../api/caregiverService'
 import AuthService from '../api/authService'
 
 export const Patient = ({navigation}) => {
-    const [firstName, setFirstName] = React.useState(''); 
-    const [lastName, setLastName] = React.useState(''); 
-    const [email, setEmail] = React.useState(''); 
+    const [firstName, setFirstName] = React.useState('');
+    const [lastName, setLastName] = React.useState('');
+    const [email, setEmail] = React.useState('');
     const [password, setPassword] = React.useState('');
-    const [passVerify, setPassVerify] = React.useState(''); 
+    const [passVerify, setPassVerify] = React.useState('');
     const [placeOfWork, setPlaceOfWork] = React.useState('');
     const [education, setEducation] = React.useState('');
     const [selAvatar1, setSelAvatar1] = React.useState(false);
@@ -22,9 +22,9 @@ export const Patient = ({navigation}) => {
     const [selAvatar6, setSelAvatar6] = React.useState(false);
     const [selAvatar7, setSelAvatar7] = React.useState(false);
     const [selAvatar8, setSelAvatar8] = React.useState(false);
-    const [avatarState, setAvatarState] = React.useState(0); 
+    const [avatarState, setAvatarState] = React.useState(0);
 
-    const backButton = () => { navigation.pop()};    
+    const backButton = () => { navigation.pop()};
 
     const signUp = () => {
         AuthService.createUser(email, password)
@@ -48,7 +48,7 @@ export const Patient = ({navigation}) => {
 
     const registerUser = () => {
         if (passVerify == password) {
-            signUp(); 
+            signUp();
             createCaregiver();
           } else {
             console.log('passwords dont match')
@@ -73,61 +73,61 @@ export const Patient = ({navigation}) => {
                     <View style={styles.avatarContainer}>
 
                         <TouchableHighlight onPress = {() => changeAvatar1()}>
-                            <Image 
+                            <Image
                                 style={styles.avatar} style = {
-                                    {borderWidth: selAvatar1 === true ? 3 : 1, 
-                                    borderRadius: 100, 
+                                    {borderWidth: selAvatar1 === true ? 3 : 1,
+                                    borderRadius: 100,
                                     borderColor: '#C7D6FF',
-                                    width: 70, 
-                                    height: 70, 
-                                    resizeMode: 'stretch' 
-                                    }} 
+                                    width: 70,
+                                    height: 70,
+                                    resizeMode: 'stretch'
+                                    }}
                                     source={require('../assets/nurse_icon_1.png')}/>
                         </TouchableHighlight>
 
                         <TouchableHighlight onPress = {() => changeAvatar2()}>
-                            <Image 
+                            <Image
                                 style={styles.avatar} style = {
-                                    {borderWidth: selAvatar2 === true ? 3 : 1, 
-                                    borderRadius: 100, 
+                                    {borderWidth: selAvatar2 === true ? 3 : 1,
+                                    borderRadius: 100,
                                     borderColor: '#C7D6FF',
-                                    width: 70, 
-                                    height: 70, 
-                                    resizeMode: 'stretch' 
-                                    }} 
+                                    width: 70,
+                                    height: 70,
+                                    resizeMode: 'stretch'
+                                    }}
                                     source={require('../assets/nurse_icon_2.png')}/>
                         </TouchableHighlight>
 
                         <TouchableHighlight onPress = {() => changeAvatar3()}>
-                            <Image 
+                            <Image
                                 style={styles.avatar} style = {
-                                    {borderWidth: selAvatar3 === true ? 3 : 1, 
-                                    borderRadius: 100, 
+                                    {borderWidth: selAvatar3 === true ? 3 : 1,
+                                    borderRadius: 100,
                                     borderColor: '#C7D6FF',
-                                    width: 70, 
-                                    height: 70, 
-                                    resizeMode: 'stretch' 
-                                    }} 
+                                    width: 70,
+                                    height: 70,
+                                    resizeMode: 'stretch'
+                                    }}
                                     source={require('../assets/nurse_icon_3.png')}/>
                         </TouchableHighlight>
 
                         <TouchableHighlight onPress = {() => changeAvatar4()}>
-                            <Image 
+                            <Image
                                 style={styles.avatar} style = {
-                                    {borderWidth: selAvatar4 === true ? 3 : 1, 
-                                    borderRadius: 100, 
+                                    {borderWidth: selAvatar4 === true ? 3 : 1,
+                                    borderRadius: 100,
                                     borderColor: '#C7D6FF',
-                                    width: 70, 
-                                    height: 70, 
-                                    resizeMode: 'stretch' 
-                                    }} 
+                                    width: 70,
+                                    height: 70,
+                                    resizeMode: 'stretch'
+                                    }}
                                     source={require('../assets/nurse_icon_4.png')}/>
                         </TouchableHighlight>
                     </View>
 
                     <KeyboardAwareScrollView>
                         <Text style = {styles.subTitle}>INFORMATION</Text>
-                        <TextInput 
+                        <TextInput
                                 style={styles.input}
                                 placeholder='First Name'
                                 placeholderTextColor="#ababab"
@@ -135,7 +135,7 @@ export const Patient = ({navigation}) => {
                                 value={firstName}
                                 color = 'black'
                         />
-                        <TextInput 
+                        <TextInput
                                 style={styles.input}
                                 placeholder='Last Name'
                                 placeholderTextColor="#ababab"
@@ -144,7 +144,7 @@ export const Patient = ({navigation}) => {
                                 color = 'black'
                         />
                     </KeyboardAwareScrollView>
-                    <TouchableOpacity 
+                    <TouchableOpacity
                         style = {styles.button}
                         onPress = {registerUser}>
                         <View style = {styles.buttonContainer}>
@@ -152,7 +152,7 @@ export const Patient = ({navigation}) => {
                         </View>
                     </TouchableOpacity>
             </View>
-               
+
         </View>
     )
 }
@@ -184,13 +184,18 @@ const styles = StyleSheet.create({
         marginRight: 60,
         borderRadius: 9,
         marginVertical: 9,
-        borderColor: 'grey', 
-        borderWidth: .5,
-        fontSize: 15 
+        fontSize: 15,
+        backgroundColor:"#fff",
+        shadowOffset: {
+            width: 0,
+            height: 4,
+        },
+        shadowOpacity: 0.25,
+        fontWeight:"600",
     },
     avatar:{
         paddingHorizontal: 20,
-        borderWidth: 1, 
+        borderWidth: 1,
         borderRadius: 100,
         borderColor: '#C7D6FF',
         resizeMode: 'stretch',
@@ -219,13 +224,13 @@ const styles = StyleSheet.create({
         width: 130,
         height: 38,
         top: 450,
-        backgroundColor: '#83E1FF', 
+        backgroundColor: '#83E1FF',
         borderRadius: 19,
         left: 140,
         top: 670
-    }, 
+    },
     backButton:{
-        top: 60, 
+        top: 60,
         left: -170
     },
     container:{
