@@ -78,11 +78,11 @@ class PatientService {
     return patientRef.get()
       .then(docSnapshot => {
         if (!docSnapshot.exists) {
-          throw Error(`Patient with UID ${caregiver.patientUID} does not exists.`)
+          throw Error(`Patient with UID ${patientUID} does not exists.`)
         }
 
         const data = docSnapshot.data()
-        return new Patient(caregiver.patientUID, data['firstName'], data['lastName'], data['caregiverUID'])
+        return new Patient(patientUID, data['firstName'], data['lastName'], data['caregiverUID'])
       })
   }
 
