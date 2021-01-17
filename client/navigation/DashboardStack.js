@@ -3,13 +3,15 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { Dashboard } from "../screens/Dashboard";
 import { LogForm } from "../screens/LogForm";
 import { FriendCode } from "../screens/FriendCode";
+import { LogDisplay } from "../screens/LogDisplay";
 
 const Stack = createStackNavigator();
 
-const DashboardStack = () => {
+const DashboardStack = (props) => {
     return (
         <Stack.Navigator>
             <Stack.Screen name="Dashboard" component={Dashboard}
+              initialParams={{data: props.data}}
               options={{
                   title: null,
                   headerStyle: {
@@ -35,6 +37,17 @@ const DashboardStack = () => {
                                   height: 0
                               },
                               headerLeft: null
+                          }}/>
+            <Stack.Screen name="LogDisplay" component={LogDisplay}
+                          initialParams={{data: props.data}}
+                          options={{
+                              title: null,
+                              headerStyle: {
+                                  backgroundColor: '#fff',
+                                  height: 0
+                              },
+                              headerLeft: null,
+                              gesturesEnabled: false
                           }}/>
         </Stack.Navigator>
     );

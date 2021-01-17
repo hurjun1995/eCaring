@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, Image, TouchableOpacity, ScrollView, SafeAreaVi
 import { LinearGradient } from 'expo-linear-gradient';
 import { Avatar, Icon } from "react-native-elements";
 
-export const Dashboard = ({navigation}) => {
+export const Dashboard = ({navigation, props, route}) => {
     const profile = (
         <View style={styles.profile}>
             <Avatar rounded source={require("../assets/nurse2.png")} size={65} avatarStyle={{borderWidth: 3, borderColor: '#C7D6FF'}}/>
@@ -18,44 +18,7 @@ export const Dashboard = ({navigation}) => {
         </View>
     );
 
-    const data = [
-        {
-            mentalHealth: 3,
-            month: "january",
-            dayNum: "15",
-            dayStr: "FRI",
-            id:1
-        },
-        {
-            mentalHealth: 4,
-            month: "january",
-            dayNum: "14",
-            dayStr: "THU",
-            id:2
-        },
-        {
-            mentalHealth: 5,
-            month: "january",
-            dayNum: "13",
-            dayStr: "WED",
-            id:3
-        },
-        {
-            mentalHealth: 1,
-            month: "january",
-            dayNum: "12",
-            dayStr: "TUE",
-            id:4
-        },
-        {
-            mentalHealth: 5,
-            month: "january",
-            dayNum: "11",
-            dayStr: "MON",
-            id:5
-        }
-    ];
-
+    const data = route?.params?.data;
     const mentalHealth = (num) => {
         let hearts = [];
         for(let i=0; i<num; i++){
@@ -79,14 +42,24 @@ export const Dashboard = ({navigation}) => {
         );
     };
 
+    const getStrDay = (num) => {
+        if(num === 0) return "SUN";
+        else if(num === 1) return "MON";
+        else if(num === 2) return "TUE";
+        else if(num === 3) return "WED";
+        else if(num === 4) return "THU";
+        else if(num === 5) return "FRI";
+        else if(num === 6) return "SAT";
+    };
+
     const dayRow = data ? (data.map( log => (
-            <View style={styles.dayRow} key={log.id}>
+            <View style={styles.dayRow} key={log.key}>
                 <View style={styles.date}>
-                    <Text style={styles.dayNum}>{log.dayNum}</Text>
-                    <Text style={styles.dayStr}>{log.dayStr}</Text>
+                    <Text style={styles.dayNum}>{log.key.getDate()}</Text>
+                    <Text style={styles.dayStr}>{getStrDay(log.key.getDay())}</Text>
                 </View>
-                {mentalHealth(log.mentalHealth)}
-                <TouchableOpacity style={{position:"absolute", right:18, top:40}}>
+                {mentalHealth(log.value.mentalHealth)}
+                <TouchableOpacity style={{position:"absolute", right:18, top:40}} onPress={() => navigation.navigate('LogDisplay', {log:log})}>
                     <Icon name="navigate-next"/>
                 </TouchableOpacity>
             </View>
