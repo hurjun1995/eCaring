@@ -29,7 +29,7 @@ export const Caregiver = ({navigation}) => {
             await AuthService.createUser(email, password)
             await AuthService.signIn(email, password)
         } catch (error) {
-            if (error.code !== c.ERROR_CAREGIVER_PROFILE_DOES_NOπT_EXIST) {
+            if (error.code !== c.ERROR_CAREGIVER_PROFILE_DOES_NOT_EXIST) {
                 throw error
             }
         }

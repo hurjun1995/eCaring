@@ -24,39 +24,36 @@ export const Gaurdian = ({navigation}) => {
 
     const createGuardian = async () => {
         try {
-          const guardian = await GuardianService.create(firstName, lastName, parseInt(friendCode));
-          console.log(guardian.toString());
-          toDash();
+          const guardian = await GuardianService.create(firstName, lastName, parseInt(friendCode))
+          setMessage(guardian.toString())
+          toDash()
         } catch (error) {
-          console.log(error.message)
-        }
-    }
-
-    
-    const signUp = async () => {
-        try {
-            await AuthService.createUser(email, password);
-            await AuthService.signIn(email, password);
-        } catch (error) {
-            console.log(error.code);
-        }
-    }
-      
-
-
-    const registerUser = async () => {
-        if (passVerify == password) {
-            await signUp();
-            await createGuardian();
-            toDash();
-          } else {
-            console.log('passwords dont match')
-          }
           setMessage(error.message)
           setCreateGuardianError(true);
         }
-    
+    }
 
+    const signUp = () => {
+        AuthService.createUser(email, password)
+          .then(userCredential => {
+            console.log(userCredential.user.email)
+          })
+          .catch(error => {
+            console.log(error.message)
+            setSignUpError(true)
+          })
+      }
+
+
+    const registerUser = () => {
+        if (passVerify === password) {
+            signUp();
+            createGuardian();
+            } else {
+                setError(true);
+                console.log('passwords dont match')
+            }
+    }
 
     const errorMsg = error ? (
         <Text style={{color:"#FF7676", fontWeight:"600", fontSize:12, letterSpacing:0.8, left: 30,}}>PASSWORDS DON'T MATCH.</Text>
@@ -72,9 +69,9 @@ export const Gaurdian = ({navigation}) => {
                         <Icon name="navigate-before"/>
                 </TouchableOpacity>
                 <View style = {styles.container}>
-                    <Text style = {styles.title}>Guardian Profile </Text>
+                    <Text style = {styles.title}>Gaurdian Profile </Text>
                         <KeyboardAwareScrollView>
-                            <Text style = {styles.subTitle}>INFORrMATION</Text>
+                            <Text style = {styles.subTitle}>INFORMATION</Text>
                             <TextInput
                                     style={styles.input}
                                     placeholder='First Name'

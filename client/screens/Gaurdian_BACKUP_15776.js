@@ -55,8 +55,29 @@ export const Gaurdian = ({navigation}) => {
           setMessage(error.message)
           setCreateGuardianError(true);
         }
-    
+    }
 
+    const signUp = () => {
+        AuthService.createUser(email, password)
+          .then(userCredential => {
+            console.log(userCredential.user.email)
+          })
+          .catch(error => {
+            console.log(error.message)
+            setSignUpError(true)
+          })
+      }
+
+
+    const registerUser = () => {
+        if (passVerify === password) {
+            signUp();
+            createGuardian();
+            } else {
+                setError(true);
+                console.log('passwords dont match')
+            }
+    }
 
     const errorMsg = error ? (
         <Text style={{color:"#FF7676", fontWeight:"600", fontSize:12, letterSpacing:0.8, left: 30,}}>PASSWORDS DON'T MATCH.</Text>
