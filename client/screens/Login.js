@@ -10,9 +10,14 @@ export const Login = ({navigation}) => {
         navigation.navigate('Select')
     }
 
+    const toDash = () => {
+        navigation.navigate('DashboardStack')
+    }
+
     const signIn = () => {
         AuthService.signIn(email, password)
           .then(userCredential => {
+            toDash()
             console.log('success')
           })
           .catch(error => {

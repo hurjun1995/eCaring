@@ -195,7 +195,7 @@ export const Caregiver = ({navigation}) => {
                         style = {styles.button}
                         onPress = {registerUser}>
                         <View style = {styles.buttonContainer}>
-                            <Text style = {styles.buttonText}>Log In</Text>
+                            <Text style = {styles.buttonText}>Sign Up</Text>
                         </View>
                     </TouchableOpacity>
             </View>

@@ -15,10 +15,15 @@ export const Gaurdian = ({navigation}) => {
     const [friendCode, setFriendCode] = React.useState('');
     const backButton = () => { navigation.pop()};
 
+    const toDash = () => {
+        navigation.navigate('DashboardStack')
+    }
+
     const createGuardian = async () => {
         try {
           const guardian = await GuardianService.create(firstName, lastName, parseInt(friendCode))
           setMessage(guardian.toString())
+          toDash()
         } catch (error) {
           setMessage(error.message)
         }

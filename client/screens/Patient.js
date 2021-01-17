@@ -3,7 +3,6 @@ import { View, Text, StyleSheet, TouchableOpacity, TouchableHighlight, TextInput
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { Icon } from 'react-native-elements';
 
-
 import PatientService from '../api/patientService';
 import CaregiverService from '../api/caregiverService'
 
@@ -21,25 +20,24 @@ export const Patient = ({navigation}) => {
     const [avatarState, setAvatarState] = React.useState(0);
 
     const backButton = () => { navigation.pop()};
+    const toDash = () => {
+        navigation.navigate('DashboardStack')
+    }
 
     const createPatient = () => {
-        PatientService.createAndRegister(getCaregiver, "Alice", "Lee")
+        PatientService.createAndRegister(CaregiverService.get(), firstName, lastName)
           .then(patient => {
-            setMessage(patient.toString())
+            toDash();
+            
           })
           .catch(error => {
-            setMessage(error.message)
+            console.log(error.message)
           })
       }
     
 
     const registerUser = () => {
-        if (passVerify == password) {
-            signUp();
-            createCaregiver();
-          } else {
-            console.log('passwords dont match')
-          }
+        createPatient();
     }
 
     const changeAvatar1 = () => { setSelAvatar1(true); setAvatarState(1), console.log(avatarState)}
@@ -58,7 +56,7 @@ export const Patient = ({navigation}) => {
             </TouchableOpacity>
 
             <View style = {styles.container}>
-                <Text style = {styles.title}>Caregiver Profile </Text>
+                <Text style = {styles.title}> Create Patient </Text>
                     <Text style = {styles.subTitle}>AVATAR</Text>
 
                     <View style={styles.avatarContainer}>
@@ -116,7 +114,6 @@ export const Patient = ({navigation}) => {
                         </TouchableHighlight>
                     </View>
 
-                    <KeyboardAwareScrollView>
                         <Text style = {styles.subTitle}>INFORMATION</Text>
                         <TextInput
                                 style={styles.input}
@@ -134,7 +131,6 @@ export const Patient = ({navigation}) => {
                                 value={lastName}
                                 color = 'black'
                         />
-                    </KeyboardAwareScrollView>
                     <TouchableOpacity
                         style = {styles.button}
                         onPress = {registerUser}>
@@ -217,11 +213,10 @@ const styles = StyleSheet.create({
         position:'absolute',
         width: 130,
         height: 38,
-        top: 450,
         backgroundColor: '#83E1FF',
         borderRadius: 19,
         left: 140,
-        top: 670
+        top: 345
     },
     backButton:{
         top: 60,
