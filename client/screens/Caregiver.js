@@ -42,10 +42,15 @@ export const Caregiver = ({navigation}) => {
         })
     }
 
+    const makePatient = () => {
+        navigation.navigate('Patient')
+    }
+
     const registerUser = () => {
         if (passVerify == password) {
             signUp(); 
             createCaregiver();
+            makePatient();
           } else {
             console.log('passwords dont match')
           }

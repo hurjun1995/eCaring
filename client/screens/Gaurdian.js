@@ -3,13 +3,8 @@ import { View, Text, StyleSheet, TouchableOpacity, TextInput, SafeAreaView} from
 import { Icon } from 'react-native-elements'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
-import {
-    CodeField,
-    Cursor,
-    useBlurOnFulfill,
-    useClearByFocusCell,
-  } from 'react-native-confirmation-code-field';
-
+import GuardianService from '../api/guardianService'
+import AuthService from '../api/authService'
 
 export const Gaurdian = ({navigation}) => {
     const [firstName, setFirstName] = React.useState(''); 
@@ -19,11 +14,36 @@ export const Gaurdian = ({navigation}) => {
     const [passVerify, setPassVerify] = React.useState(''); 
     const [friendCode, setFriendCode] = React.useState('');
     const backButton = () => { navigation.pop()};
-    const ref = useBlurOnFulfill({friendCode, cellCount: 4});
-    const [props, getCellOnLayoutHandler] = useClearByFocusCell({
-        friendCode,
-        setFriendCode,
-      });
+
+    const createGuardian = async () => {
+        try {
+          const guardian = await GuardianService.create(firstName, lastName, parseInt(friendCode))
+          setMessage(guardian.toString())
+        } catch (error) {
+          setMessage(error.message)
+        }
+    }
+
+    const signUp = () => {
+        AuthService.createUser(email, password)
+          .then(userCredential => {
+            console.log(userCredential.user.email)
+          })
+          .catch(error => {
+            console.log(error.message)
+          })
+      }
+
+
+    const registerUser = () => {
+        if (passVerify == password) {
+            signUp(); 
+            createGuardian();
+            } else {
+                console.log('passwords dont match')
+            }
+    }
+
     return(
         <View >
                 <TouchableOpacity style={styles.backButton} onPress = {backButton}>
@@ -113,7 +133,7 @@ export const Gaurdian = ({navigation}) => {
                         </KeyboardAwareScrollView>
                   
                 </View>
-                <TouchableOpacity style = {styles.button}>
+                <TouchableOpacity style = {styles.button} onPress={registerUser}>
                         <View style = {styles.buttonContainer}>
                             <Text style = {styles.buttonText}>Submit</Text>
                         </View>

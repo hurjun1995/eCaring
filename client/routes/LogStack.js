@@ -5,6 +5,7 @@ import {Login} from '../screens/Login';
 import {AccSelect} from '../screens/AccSelect'; 
 import {Gaurdian} from '../screens/Gaurdian';
 import {Caregiver} from '../screens/Caregiver';
+import {Patient} from '../screens/Patient'
 
 const Stack = createStackNavigator(); 
 
@@ -42,6 +43,16 @@ const LogStack = () => {
                 }}
             />
              <Stack.Screen name = "Caregiver" component = {Caregiver}
+                options={{
+                    title:null,
+                    headerStyle:{
+                        backgroundColor: '#FBFBFB',
+                        height:1
+                    },
+                    headerLeft: null
+                }}
+            />
+            <Stack.Screen name = "Patient" component = {Patient}
                 options={{
                     title:null,
                     headerStyle:{
