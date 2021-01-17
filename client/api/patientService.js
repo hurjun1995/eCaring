@@ -69,20 +69,20 @@ class PatientService {
   }
 
   /**
-   * Try get Patient registered to given caregiver UID from DB.
+   * Try get Patient registered to given patient's UID from DB.
    * On success, construct and return a Patient object.
-   * @param {Object} caregiver Caregiver object
+   * @param {string} patientUID UID of patient
    */
-  static get(caregiver) {
-    const patientRef = firebase.firestore().collection(PATIENT_COLLECTION).doc(caregiver.patientUID)
+  static get(patientUID) {
+    const patientRef = firebase.firestore().collection(PATIENT_COLLECTION).doc(patientUID)
     return patientRef.get()
       .then(docSnapshot => {
         if (!docSnapshot.exists) {
-          throw Error(`Patient with UID ${caregiver.patientUID} does not exists.`)
+          throw Error(`Patient with UID ${patientUID} does not exists.`)
         }
 
         const data = docSnapshot.data()
-        return new Patient(caregiver.patientUID, data['firstName'], data['lastName'], data['caregiverUID'])
+        return new Patient(patientUID, data['firstName'], data['lastName'], data['caregiverUID'])
       })
   }
 

@@ -84,7 +84,7 @@ export default function App() {
   }
 
   const getPatient = () => {
-    PatientService.get(caregiver)
+    PatientService.get(caregiver.patientUID)
       .then(patient => {
         setMessage(patient.toString())
       })
@@ -95,7 +95,7 @@ export default function App() {
 
   const generateToken = async () => {
     try {
-      const patient = await PatientService.get(caregiver)
+      const patient = await PatientService.get(caregiver.patientUID)
       const token = await PatientService.generateToken(patient)
       setMessage(token)
       setToken(token)
@@ -125,7 +125,7 @@ export default function App() {
 
   const addLog = async () => {
     try {
-      const patient = await PatientService.get(caregiver)
+      const patient = await PatientService.get(caregiver.patientUID)
       const medicines = [
         {name: "Ibuprofen", dosage: 100},
         {name: "Omega-3", dosage:250}
@@ -141,7 +141,7 @@ export default function App() {
 
   const getLog = async () => {
     try {
-      const patient = await PatientService.get(caregiver)
+      const patient = await PatientService.get(caregiver.patientUID)
       const logs = await LogService.get(patient)
       setMessage('fetched log!')
       console.log(logs)
