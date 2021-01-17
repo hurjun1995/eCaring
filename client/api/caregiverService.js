@@ -1,6 +1,6 @@
 import firebase from './firebase'
 import Caregiver from '../model/caregiver'
-import { CAREGIVER_COLLECTION } from './constants'
+import { CAREGIVER_COLLECTION, ERROR_CAREGIVER_PROFILE_DOES_NOT_EXIST } from './constants'
 
 class CaregiverService {
   /**
@@ -58,9 +58,7 @@ class CaregiverService {
    */
   static async get() {
     const docSnapshot = await this.getExistingCaregiverDocSnapshot()
-    const data = docSnapshot.data()
-    return new Caregiver(firebase.auth().currentUser.uid, data['firstName'], data['lastName'],
-                         data['workPlace'], data['education'], data['email'], data["patientUID"])
+    return this.createNewCaregiver(docSnapshot.data())
   }
 
   /**
@@ -85,14 +83,29 @@ class CaregiverService {
     const docSnapshot = await caregiverRef.get()
 
     if (!docSnapshot.exists) {
-      throw Error(`Caregiver with UID ${caregiverUID} does not exists.`)
+      const error = Error("Caregiver does not exists.")
+      error.code = ERROR_CAREGIVER_PROFILE_DOES_NOT_EXIST
+      throw error
     }
     return caregiverRef
   }
 
+  /**
+   * Return ref to document snapshot with current user's UID if exists.
+   * Throw error otherwise.
+   */
   static async getExistingCaregiverDocSnapshot() {
     const caregiverRef = await this.getExistingCaregiverRef()
     return await caregiverRef.get()
+  }
+
+  /**
+   * Construct a Caregiver object using given data
+   * @param {Object} data data returned from firestore query
+   */
+  static createNewCaregiver(data) {
+    return new Caregiver(firebase.auth().currentUser.uid, data['firstName'], data['lastName'],
+                          data['workPlace'], data['education'], data['email'], data["patientUID"])
   }
 }
 

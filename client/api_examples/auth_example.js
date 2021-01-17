@@ -8,15 +8,16 @@ import AuthService from './api/authService'
 import CaregiverService from './api/caregiverService'
 import PatientService from './api/patientService'
 
+import * as c from './api/constants'
+
 export default function App() {
   const [message, setMessage] = useState("placeholder")
   const [caregiver, setCaregiver] = useState({})
 
-  const authService = new AuthService()
-  const email = "test8@example.com"
+  const email = "test9@example.com"
   const password = "testpass"
   const signUp = () => {
-    authService.createUser(email, password)
+    AuthService.createUser(email, password)
       .then(userCredential => {
         setMessage(userCredential.user.email)
       })
@@ -25,9 +26,9 @@ export default function App() {
       })
   }
   const signIn = () => {
-    authService.signIn(email, password)
-      .then(userCredential => {
-        setMessage(userCredential.user.email)
+    AuthService.signIn(email, password)
+      .then(user => {
+        setMessage(user.toString())
       })
       .catch(error => {
         setMessage(error.message)
