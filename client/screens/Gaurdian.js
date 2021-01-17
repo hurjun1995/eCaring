@@ -1,5 +1,5 @@
-import React, {Fragment}  from 'react'; 
-import { View, Text, StyleSheet, TouchableOpacity, TextInput, SafeAreaView} from 'react-native'; 
+import React, {Fragment}  from 'react';
+import { View, Text, StyleSheet, TouchableOpacity, TextInput, SafeAreaView} from 'react-native';
 import { Icon } from 'react-native-elements'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
@@ -12,11 +12,11 @@ import {
 
 
 export const Gaurdian = ({navigation}) => {
-    const [firstName, setFirstName] = React.useState(''); 
-    const [lastName, setLastName] = React.useState(''); 
-    const [email, setEmail] = React.useState(''); 
+    const [firstName, setFirstName] = React.useState('');
+    const [lastName, setLastName] = React.useState('');
+    const [email, setEmail] = React.useState('');
     const [password, setPassword] = React.useState('');
-    const [passVerify, setPassVerify] = React.useState(''); 
+    const [passVerify, setPassVerify] = React.useState('');
     const [friendCode, setFriendCode] = React.useState('');
     const backButton = () => { navigation.pop()};
     const ref = useBlurOnFulfill({friendCode, cellCount: 4});
@@ -33,7 +33,7 @@ export const Gaurdian = ({navigation}) => {
                     <Text style = {styles.title}>Gaurdian Profile </Text>
                         <KeyboardAwareScrollView>
                             <Text style = {styles.subTitle}>INFORMATION</Text>
-                            <TextInput 
+                            <TextInput
                                     style={styles.input}
                                     placeholder='First Name'
                                     placeholderTextColor="#ababab"
@@ -41,7 +41,7 @@ export const Gaurdian = ({navigation}) => {
                                     value={firstName}
                                     color = 'black'
                             />
-                            <TextInput 
+                            <TextInput
                                     style={styles.input}
                                     placeholder='Last Name'
                                     placeholderTextColor="#ababab"
@@ -49,7 +49,7 @@ export const Gaurdian = ({navigation}) => {
                                     value={lastName}
                                     color = 'black'
                             />
-                            <TextInput 
+                            <TextInput
                                     style={styles.input}
                                     placeholder='E-mail Address'
                                     placeholderTextColor="#ababab"
@@ -57,7 +57,7 @@ export const Gaurdian = ({navigation}) => {
                                     value={email}
                                     color = 'black'
                             />
-                            <TextInput 
+                            <TextInput
                                     style={styles.input}
                                     placeholder='Password'
                                     placeholderTextColor="#ababab"
@@ -66,7 +66,7 @@ export const Gaurdian = ({navigation}) => {
                                     value={password}
                                     color = 'black'
                             />
-                            <TextInput 
+                            <TextInput
                                     style={styles.input}
                                     placeholder='Confirm Password'
                                     placeholderTextColor="#ababab"
@@ -77,7 +77,7 @@ export const Gaurdian = ({navigation}) => {
                             />
                             <Text style = {styles.subTitle}>VERIFICATION</Text>
                             <Text style = {styles.verifyExplain}> Get in contact with the long term care nurse to generate a Friend Code</Text>
-                            <TextInput 
+                            <TextInput
                                     style={styles.Code}
                                     placeholder='Enter Friend Code'
                                     placeholderTextColor="#ababab"
@@ -111,7 +111,7 @@ export const Gaurdian = ({navigation}) => {
 
 
                         </KeyboardAwareScrollView>
-                  
+
                 </View>
                 <TouchableOpacity style = {styles.button}>
                         <View style = {styles.buttonContainer}>
@@ -157,8 +157,14 @@ const styles = StyleSheet.create({
         marginRight: 60,
         borderRadius: 9,
         marginVertical: 9,
-        borderColor: 'grey', 
-        borderWidth: .5
+        fontSize: 15,
+        backgroundColor:"#fff",
+        shadowOffset: {
+            width: 0,
+            height: 4,
+        },
+        shadowOpacity: 0.25,
+        fontWeight:"600"
     },
     buttonText:{
         color:'white',
@@ -176,13 +182,13 @@ const styles = StyleSheet.create({
         width: 130,
         height: 38,
         top: 400,
-        backgroundColor: '#83E1FF', 
+        backgroundColor: '#83E1FF',
         borderRadius: 19,
         left: 140,
         top: 620
     },
     verifyExplain:{
-        textAlign: 'center', 
+        textAlign: 'center',
         paddingHorizontal: 30,
         fontSize: 12
     },
@@ -192,22 +198,22 @@ const styles = StyleSheet.create({
         height: 90,
         borderRadius: 9,
         marginVertical: 9,
-        borderColor: 'grey', 
+        borderColor: 'grey',
         borderWidth: .5,
         fontSize: 40,
         textAlign: 'center',
         borderBottomWidth: 2,
         paddingRight: 20
-        
+
     },
     boxContainer: {
         flexDirection: 'row',
         justifyContent: 'space-between',
         width:"80%",
         left: '5%',
-    }, 
+    },
     backButton:{
-        top: 60, 
+        top: 60,
         left: -170
     },
     container:{
@@ -221,7 +227,7 @@ const styles = StyleSheet.create({
         marginRight: 60,
         borderRadius: 9,
         marginVertical: 9,
-        borderColor: 'grey', 
+        borderColor: 'grey',
         borderWidth: .5,
         textAlign: 'center'
     }
