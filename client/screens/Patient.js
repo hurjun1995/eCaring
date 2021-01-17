@@ -60,6 +60,8 @@ export const Patient = ({navigation}) => {
 
                     <View style={styles.avatarContainer}>
 
+                        <View style={{flexDirection: 'row',
+                            flexWrap: 'wrap', justifyContent:'space-between', paddingBottom:12}}>
                         <TouchableHighlight onPress = {() => changeAvatar1()} style={{borderRadius:100}}>
                             <Image
                                 style={styles.avatar} style = {
@@ -70,7 +72,7 @@ export const Patient = ({navigation}) => {
                                     height: 70,
                                     resizeMode: 'stretch'
                                     }}
-                                    source={require('../assets/nurse_icon_1.png')}/>
+                                    source={require('../assets/ladyicon_1.png')}/>
                         </TouchableHighlight>
 
                         <TouchableHighlight onPress = {() => changeAvatar2()} style={{borderRadius:100}}>
@@ -83,7 +85,7 @@ export const Patient = ({navigation}) => {
                                     height: 70,
                                     resizeMode: 'stretch'
                                     }}
-                                    source={require('../assets/nurse_icon_2.png')}/>
+                                    source={require('../assets/ladyicon_2.png')}/>
                         </TouchableHighlight>
 
                         <TouchableHighlight onPress = {() => changeAvatar3()} style={{borderRadius:100}}>
@@ -96,7 +98,7 @@ export const Patient = ({navigation}) => {
                                     height: 70,
                                     resizeMode: 'stretch'
                                     }}
-                                    source={require('../assets/nurse_icon_3.png')}/>
+                                    source={require('../assets/ladyicon_3.png')}/>
                         </TouchableHighlight>
 
                         <TouchableHighlight onPress = {() => changeAvatar4()} style={{borderRadius:100}}>
@@ -109,8 +111,64 @@ export const Patient = ({navigation}) => {
                                     height: 70,
                                     resizeMode: 'stretch'
                                     }}
-                                    source={require('../assets/nurse_icon_4.png')}/>
+                                    source={require('../assets/ladyicon_4.png')}/>
                         </TouchableHighlight>
+                        </View>
+
+                        <View style={{flexDirection: 'row',
+                            flexWrap: 'wrap', justifyContent:"space-between"}}>
+                        <TouchableHighlight onPress = {() => changeAvatar5()} style={{borderRadius:100}}>
+                            <Image
+                                style={styles.avatar} style = {
+                                {borderWidth: selAvatar5 === true ? 3 : 1,
+                                    borderRadius: 100,
+                                    borderColor: selAvatar5 === true ? '#83E1FF' : '#C7D6FF',
+                                    width: 70,
+                                    height: 70,
+                                    resizeMode: 'stretch'
+                                }}
+                                source={require('../assets/manicon_1.png')}/>
+                        </TouchableHighlight>
+
+                        <TouchableHighlight onPress = {() => changeAvatar6()} style={{borderRadius:100}}>
+                            <Image
+                                style={styles.avatar} style = {
+                                {borderWidth: selAvatar6 === true ? 3 : 1,
+                                    borderRadius: 100,
+                                    borderColor: selAvatar6 === true ? '#83E1FF' : '#C7D6FF',
+                                    width: 70,
+                                    height: 70,
+                                    resizeMode: 'stretch'
+                                }}
+                                source={require('../assets/manicon_2.png')}/>
+                        </TouchableHighlight>
+
+                        <TouchableHighlight onPress = {() => changeAvatar7()} style={{borderRadius:100}}>
+                            <Image
+                                style={styles.avatar} style = {
+                                {borderWidth: selAvatar7 === true ? 3 : 1,
+                                    borderRadius: 100,
+                                    borderColor: selAvatar7 === true ? '#83E1FF' : '#C7D6FF',
+                                    width: 70,
+                                    height: 70,
+                                    resizeMode: 'stretch'
+                                }}
+                                source={require('../assets/manicon_3.png')}/>
+                        </TouchableHighlight>
+
+                        <TouchableHighlight onPress = {() => changeAvatar8()} style={{borderRadius:100}}>
+                            <Image
+                                style={styles.avatar} style = {
+                                {borderWidth: selAvatar8 === true ? 3 : 1,
+                                    borderRadius: 100,
+                                    borderColor: selAvatar8 === true ? '#83E1FF' : '#C7D6FF',
+                                    width: 70,
+                                    height: 70,
+                                    resizeMode: 'stretch'
+                                }}
+                                source={require('../assets/manicon_4.png')}/>
+                        </TouchableHighlight>
+                        </View>
                     </View>
 
                         <Text style = {styles.subTitle}>INFORMATION</Text>
@@ -192,12 +250,10 @@ const styles = StyleSheet.create({
         height: 60,
     },
     avatarContainer:{
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        width:"80%",
-        left: '5%',
+        width:"85%",
         paddingTop:10,
-        paddingBottom:10
+        paddingBottom:10,
+        alignSelf:"center"
     },
     buttonText:{
         color:'white',
@@ -218,7 +274,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#83E1FF',
         borderRadius: 19,
         left: 140,
-        top: 345
+        top: 440
     },
     backButton:{
         top: 60,
