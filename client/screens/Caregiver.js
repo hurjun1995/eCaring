@@ -56,10 +56,10 @@ export const Caregiver = ({navigation}) => {
           }
     }
 
-    const changeAvatar1 = () => { setSelAvatar1(true); setAvatarState(1), console.log(avatarState)}
-    const changeAvatar2 = () => { setSelAvatar2(true); setAvatarState(2), console.log(avatarState)}
-    const changeAvatar3 = () => { setSelAvatar3(true); setAvatarState(3), console.log(avatarState)}
-    const changeAvatar4 = () => { setSelAvatar4(true); setAvatarState(4), console.log(avatarState)}
+    const changeAvatar1 = () => { setSelAvatar1(!selAvatar1); setAvatarState(1), console.log(avatarState)}
+    const changeAvatar2 = () => { setSelAvatar2(!selAvatar2); setAvatarState(2), console.log(avatarState)}
+    const changeAvatar3 = () => { setSelAvatar3(!selAvatar3); setAvatarState(3), console.log(avatarState)}
+    const changeAvatar4 = () => { setSelAvatar4(!selAvatar4); setAvatarState(4), console.log(avatarState)}
 
     return(
         <View style={{backgroundColor:"#FBFBFB", height:"100%"}}>
@@ -73,12 +73,12 @@ export const Caregiver = ({navigation}) => {
 
                     <View style={styles.avatarContainer}>
 
-                        <TouchableHighlight onPress = {() => changeAvatar1()}>
+                        <TouchableHighlight onPress = {() => changeAvatar1()} style={{borderRadius:100}}>
                             <Image
                                 style={styles.avatar} style = {
                                     {borderWidth: selAvatar1 === true ? 3 : 1,
                                     borderRadius: 100,
-                                    borderColor: '#C7D6FF',
+                                    borderColor: selAvatar1 === true ? '#83E1FF' : '#C7D6FF',
                                     width: 70,
                                     height: 70,
                                     resizeMode: 'stretch'
@@ -86,12 +86,12 @@ export const Caregiver = ({navigation}) => {
                                     source={require('../assets/nurse_icon_1.png')}/>
                         </TouchableHighlight>
 
-                        <TouchableHighlight onPress = {() => changeAvatar2()}>
+                        <TouchableHighlight onPress = {() => changeAvatar2()} style={{borderRadius:100}}>
                             <Image
                                 style={styles.avatar} style = {
                                     {borderWidth: selAvatar2 === true ? 3 : 1,
                                     borderRadius: 100,
-                                    borderColor: '#C7D6FF',
+                                    borderColor: selAvatar2 === true ? '#83E1FF' : '#C7D6FF',
                                     width: 70,
                                     height: 70,
                                     resizeMode: 'stretch'
@@ -99,12 +99,12 @@ export const Caregiver = ({navigation}) => {
                                     source={require('../assets/nurse_icon_2.png')}/>
                         </TouchableHighlight>
 
-                        <TouchableHighlight onPress = {() => changeAvatar3()}>
+                        <TouchableHighlight onPress = {() => changeAvatar3()} style={{borderRadius:100}}>
                             <Image
                                 style={styles.avatar} style = {
                                     {borderWidth: selAvatar3 === true ? 3 : 1,
                                     borderRadius: 100,
-                                    borderColor: '#C7D6FF',
+                                    borderColor: selAvatar3 === true ? '#83E1FF' : '#C7D6FF',
                                     width: 70,
                                     height: 70,
                                     resizeMode: 'stretch'
@@ -112,12 +112,12 @@ export const Caregiver = ({navigation}) => {
                                     source={require('../assets/nurse_icon_3.png')}/>
                         </TouchableHighlight>
 
-                        <TouchableHighlight onPress = {() => changeAvatar4()}>
+                        <TouchableHighlight onPress = {() => changeAvatar4()} style={{borderRadius:100}}>
                             <Image
                                 style={styles.avatar} style = {
                                     {borderWidth: selAvatar4 === true ? 3 : 1,
                                     borderRadius: 100,
-                                    borderColor: '#C7D6FF',
+                                    borderColor: selAvatar4 === true ? '#83E1FF' : '#C7D6FF',
                                     width: 70,
                                     height: 70,
                                     resizeMode: 'stretch'
@@ -217,9 +217,10 @@ const styles = StyleSheet.create({
         fontSize: 12,
         lineHeight: 18,
         color: '#8A8A8A',
-        left: 27,
+        left: 30,
         paddingVertical: 14,
-        fontWeight:"600"
+        fontWeight:"600",
+        marginBottom: -10
     },
     container:{
         backgroundColor: '#FBFBFB',
@@ -255,7 +256,9 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         width:"80%",
-        left: '5%'
+        left: '5%',
+        marginBottom:16,
+        marginTop:10
     },
     buttonText:{
         color:'white',
