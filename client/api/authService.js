@@ -1,4 +1,5 @@
 import firebase from './firebase'
+import caregiverService from './caregiverService'
 
 const ERROR_AUTH_EMAIL_ALREADY_IN_USE = 'auth/email-already-in-use'
 const ERROR_AUTH_INVALID_EMAIL = 'auth/invalid-email'
@@ -17,39 +18,49 @@ class AuthService {
    * @param email user's email
    * @param password user's password
    */
-  createUser(email, password) {
+  static createUser(email, password) {
     return firebase.auth().createUserWithEmailAndPassword(email, password)
       .catch(error => {
         const errorCode = error.code
         if (errorCode === ERROR_AUTH_OPERATION_NOT_ALLOWED) {
           throw Error('Internal error. Please try again.')
         } else {
-          throw error //TODO: check the error message
+          throw error
         }
       })
   }
 
   /**
    * Try sign in with given email and password.
-   * On success, return Promise<UserCredential>
-   * On failure, return error message
+   * On success, return either Promise<Caregiver> or Promise<Guardian>. You can check its type using "instanceof".
+   * On failure, return error.
+   * If the user exists but profile is not created, error with either ERROR_CAREGIVER_PROFILE_DOES_NOT_EXIST
+   * or ERROR_GUARDIAN_PROFILE_DOES_NOT_EXIST as code will be raised.
    * @param email user's email
    * @param password user's password
    */
-  signIn(email, password) {
-    return firebase.auth().signInWithEmailAndPassword(email, password)
-      .catch(error => {
-        const errorCode = error.code
-        if (errorCode === ERROR_AUTH_USER_NOT_FOUND
-            || errorCode === ERROR_AUTH_WRONG_PASSWORD) {
-          throw Error('Invalid email and/or password.')
-        } else {
-          throw error
-        }
-      })
+  static async signIn(email, password) {
+    try {
+      await firebase.auth().signInWithEmailAndPassword(email, password)
+
+      const caregiver = await caregiverService.get()
+      if (caregiver) return caregiver
+
+      // TODO: still implementing
+      // const guardian = await guardianService.get()
+      // if (guardian) return guardian
+    } catch (error) {
+      const errorCode = error.code
+      if (errorCode === ERROR_AUTH_USER_NOT_FOUND
+          || errorCode === ERROR_AUTH_WRONG_PASSWORD) {
+        throw Error('Invalid email and/or password.')
+      } else {
+        throw error
+      }
+    }
   }
 
-  signOut() {
+  static signOut() {
     firebase.auth().signOut()
   }
 }
