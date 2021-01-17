@@ -6,7 +6,7 @@ import { Avatar, Icon } from "react-native-elements";
 export const Dashboard = ({navigation}) => {
     const profile = (
         <View style={styles.profile}>
-            <Avatar rounded source={require("../assets/nurse2.png")} size={65} avatarStyle={{borderWidth: 3, borderColor: '#C7D6FF'}}/>
+            <Avatar rounded source={require("../assets/nurse_2.png")} size={65} avatarStyle={{borderWidth: 3, borderColor: '#C7D6FF'}}/>
             <Text style={styles.profileText}>You will be assisting Jane today</Text>
             <View style={styles.buttonContainer}>
                 <Icon reverse color="#83E1FF" size={18} name="group-add" onPress={() => navigation.navigate('FriendCode')}/>
