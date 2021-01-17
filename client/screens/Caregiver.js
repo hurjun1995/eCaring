@@ -5,6 +5,7 @@ import { Icon } from 'react-native-elements';
 
 import CaregiverService from '../api/caregiverService'
 import AuthService from '../api/authService'
+import * as c from '../api/constants'
 
 export const Caregiver = ({navigation}) => {
     const [firstName, setFirstName] = React.useState('');
@@ -22,35 +23,34 @@ export const Caregiver = ({navigation}) => {
 
     const backButton = () => { navigation.pop()};
 
-    const signUp = () => {
-        AuthService.createUser(email, password)
-          .then(userCredential => {
-            console.log('hello')
-          })
-          .catch(error => {
-            console.log(error.message)
-          })
+    const signUp = async () => {
+        try {
+            await AuthService.createUser(email, password)
+            await AuthService.signIn(email, password)
+        } catch (error) {
+            if (error.code !== c.ERROR_CAREGIVER_PROFILE_DOES_NOπT_EXIST) {
+                throw error
+            }
+        }
       }
 
-    const createCaregiver = () => {
-        CaregiverService.create(firstName, lastName, placeOfWork, education)
-        .then(caregiver =>{
-            console.log('hello')
-        })
-        .catch(error => {
+    const createCaregiver = async () => {
+        try {
+            await CaregiverService.create(firstName, lastName, placeOfWork, education)
+        } catch (error) {
             console.log(error.message)
-        })
+        }
     }
 
-    const makePatient = () => {
+    const toPatient = () => {
         navigation.navigate('Patient')
     }
 
-    const registerUser = () => {
+    const registerUser = async () => {
         if (passVerify == password) {
-            signUp();
-            createCaregiver();
-            makePatient();
+            await signUp();
+            await createCaregiver();
+            toPatient();
           } else {
             console.log('passwords dont match')
           }

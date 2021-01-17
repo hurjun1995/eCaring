@@ -24,16 +24,14 @@ export const Patient = ({navigation}) => {
         navigation.navigate('DashboardStack')
     }
 
-    const createPatient = () => {
-        PatientService.createAndRegister(CaregiverService.get(), firstName, lastName)
-          .then(patient => {
-            console.log(CaregiverService.get());
-            toDash();
-            
-          })
-          .catch(error => {
+    const createPatient = async () => {
+        try {
+            const caregiver = await CaregiverService.get()
+            await PatientService.createAndRegister(caregiver, firstName, lastName)
+            toDash()
+        } catch(error) {
             console.log(error.message)
-          })
+        }
       }
     
 

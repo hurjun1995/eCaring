@@ -44,11 +44,11 @@ class AuthService {
     try {
       await firebase.auth().signInWithEmailAndPassword(email, password)
 
-      const caregiver = await CaregiverService.get()
-      if (caregiver) return caregiver
+      // const caregiver = await CaregiverService.get()
+      // if (caregiver) return caregiver
 
-      const guardian = await GuardianService.get()
-      if (guardian) return guardian
+      // const guardian = await GuardianService.get()
+      // if (guardian) return guardian
     } catch (error) {
       const errorCode = error.code
       if (errorCode === ERROR_AUTH_USER_NOT_FOUND
